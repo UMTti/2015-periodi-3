@@ -1,1 +1,1 @@
-# 2015-periodi-3
+# JPEG compressing algorithm 
