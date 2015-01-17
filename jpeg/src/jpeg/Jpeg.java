@@ -5,6 +5,8 @@
  */
 package jpeg;
 
+import java.io.IOException;
+
 /**
  *
  * @author pihla
@@ -14,8 +16,10 @@ public class Jpeg {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
+        Preprocessor p = new Preprocessor();
+        p.separate("kuva.rgb", "rgb", 64, 64);
     }
     
 }
