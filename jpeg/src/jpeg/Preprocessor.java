@@ -15,12 +15,27 @@ import java.util.*;
  */
 public class Preprocessor {
 
+    /**
+     *
+     */
     public int blocks[][][][];
 
+    /**
+     *
+     */
     public Preprocessor() {
         this.blocks = blocks;
     }
 
+    /**
+     * Read byte data and separate it into 8*8 arrays.
+     * @param filename
+     * @param datatype
+     * @param x
+     * @param y
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public void separate(String filename, String datatype, int x, int y) throws FileNotFoundException, IOException {
         //  read the file into a byte array
         File file = new File(filename);
@@ -39,7 +54,7 @@ public class Preprocessor {
                 int b = fis.read();
                 this.blocks[position][px][py][j] = b & 0xff;
             }
-
+            this.blocks[position][px][py] = convertToYCbCr(this.blocks[position][px][py]);
             px++;
             if (px == 8) {
                 px = 0;
@@ -60,6 +75,10 @@ public class Preprocessor {
         //bb.order(ByteOrder.LITTLE_ENDIAN);*/
     }
 
+    /**
+     * Decrease all values of block with value given a parameter
+     * @param value
+     */
     public void decreaseBlocks(int value) {
         for (int i = 0; i < this.blocks.length; i++) {
             for (int j = 0; j < this.blocks[i].length; j++) {
@@ -72,6 +91,9 @@ public class Preprocessor {
         }
     }
 
+    /**
+     *
+     */
     public void printBlocks() {
         for (int i = 0; i < this.blocks.length; i++) {
             for (int j = 0; j < this.blocks[i].length; j++) {
@@ -84,6 +106,27 @@ public class Preprocessor {
                 System.out.println("");
             }
         }
+    }
+    
+    /**
+     * Converts RGB-value block to YCrCb block
+     * @param block
+     * @return
+     */
+    public int[] convertToYCbCr(int[] block){
+        int r = block[0];
+        int g = block[1];
+        int b = block[2];
+        int Y = (int)(0.257 * r + 0.50 * g + 0.098 * b + 16);
+
+        int Cb = (int)(-0.148 * r - 0.291 * g + 0.439 * b + 128);
+
+        int Cr = (int)(0.439 * r - 0.368 * g - 0.071 * b + 128);
+        
+        block[0] = Y;
+        block[1] = Cb;
+        block[2] = Cr;
+        return block;
     }
 
 }

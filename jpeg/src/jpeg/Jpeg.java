@@ -22,6 +22,7 @@ public class Jpeg {
         p.separate("kuva.rgb", "rgb", 64, 64);
         p.decreaseBlocks(127);
         p.printBlocks();
+        Transformer t = new Transformer(p.blocks);
     }
     
 }
