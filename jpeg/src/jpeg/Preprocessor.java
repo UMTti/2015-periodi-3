@@ -15,8 +15,10 @@ import java.util.*;
  */
 public class Preprocessor {
 
-    public Preprocessor() {
+    public int blocks[][][][];
 
+    public Preprocessor() {
+        this.blocks = blocks;
     }
 
     public void separate(String filename, String datatype, int x, int y) throws FileNotFoundException, IOException {
@@ -24,26 +26,58 @@ public class Preprocessor {
         File file = new File(filename);
         FileInputStream fis = new FileInputStream(file);
         //byte[] arr = new byte[(int) file.length()];
-        int count = (x*y*3) / (8*8);
-        int[][][] blocks = new int[count][8][8];
+        int count = (x * y) / (8 * 8);
+        System.out.println("Count: " + count);
+        this.blocks = new int[count][8][8][3];
+        int maara = 0;
         int position = 0;
         int px = 0;
         int py = 0;
-        for (int i = 0; i < x * y * 3; i++) {
-            int b = fis.read();
-            blocks[position][px][py] = b & 0xff;
+        for (int i = 0; i < x * y ; i++) {
+            for (int j = 0; j < 3; j++) {
+                int b = fis.read();
+                this.blocks[position][px][py][j] = b & 0xff;
+                maara++;
+            }
+
             px++;
-            if(px == 8){
+            if (px == 8) {
                 px = 0;
                 position++;
             }
-            if(position == count){
+            if (position == count) {
                 py++;
                 position = 0;
             }
         }
-        
-         //bb.order(ByteOrder.LITTLE_ENDIAN);*/
+
+        //bb.order(ByteOrder.LITTLE_ENDIAN);*/
+    }
+
+    public void decreaseBlocks(int value) {
+        for (int i = 0; i < this.blocks.length; i++) {
+            for (int j = 0; j < this.blocks[i].length; j++) {
+                for (int k = 0; k < this.blocks[i][j].length; k++) {
+                    for(int z = 0; z<3;z++){
+                        this.blocks[i][j][k][z] -= 127;
+                    }
+                }
+            }
+        }
+    }
+
+    public void printBlocks() {
+        for (int i = 0; i < this.blocks.length; i++) {
+            for (int j = 0; j < this.blocks[i].length; j++) {
+                for (int k = 0; k < this.blocks[i][j].length; k++) {
+                    for(int z=0;z<3;z++){
+                        System.out.println(this.blocks[i][j][k][z]);
+                    }
+                    System.out.println("");
+                }
+                System.out.println("");
+            }
+        }
     }
 
 }
