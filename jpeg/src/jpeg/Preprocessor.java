@@ -33,11 +33,11 @@ public class Preprocessor {
         int position = 0;
         int px = 0;
         int py = 0;
+        int alkuposition = 0;
         for (int i = 0; i < x * y ; i++) {
             for (int j = 0; j < 3; j++) {
                 int b = fis.read();
                 this.blocks[position][px][py][j] = b & 0xff;
-                maara++;
             }
 
             px++;
@@ -45,9 +45,15 @@ public class Preprocessor {
                 px = 0;
                 position++;
             }
-            if (position == count) {
+            if (position == alkuposition + (x/8)) {
                 py++;
-                position = 0;
+                position = alkuposition;
+                if(py == 8){
+                    // pitaa siirtaa positionia jotenkin
+                    position += (x/8);
+                    alkuposition = position;
+                    py = 0;
+                }
             }
         }
 

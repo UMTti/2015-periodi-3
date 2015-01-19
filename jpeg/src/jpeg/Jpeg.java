@@ -20,6 +20,8 @@ public class Jpeg {
         // TODO code application logic here
         Preprocessor p = new Preprocessor();
         p.separate("kuva.rgb", "rgb", 64, 64);
+        p.decreaseBlocks(127);
+        p.printBlocks();
     }
     
 }
