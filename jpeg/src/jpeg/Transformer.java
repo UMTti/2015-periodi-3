@@ -11,15 +11,18 @@ package jpeg;
  */
 public class Transformer {
     
-    public int[][][][] blocks;
-    public int[][] cosinematrix;
+    /**
+     *
+     */
+    public double[][][][] blocks;
+
     private int n;
     private double[] c;
     /**
-     *
+     * 
      * @param blocks
      */
-    public Transformer(int[][][][] blocks){
+    public Transformer(double[][][][] blocks){
         this.blocks = blocks;
         this.n= 8;
         this.initializeCoefficients();
@@ -37,36 +40,53 @@ public class Transformer {
     
     
     /**
-     * Makes DCT transform block by block for blocks array
+     * Does a function given a parameter for all 8*8 blocks and saves block back
+     * @param blocks
+     * @param command
+     * @return 
      */
-    public void transform(){
-        
+    public double[][][][] doForBlocks(double[][][][] blocks, String command){
+        // komennoiksi multiplyWithCosines ja applyIDCT
+        for(int i = 0;i<blocks.length;i++){
+            //täällä on elikkä niitä 8 arrayta joissa kaikissa on 3 tasoa
+            double[][] y = new double[8][8];
+            double[][] cb = new double[8][8];
+            double[][] cr = new double[8][8];
+            for(int j = 0;j<blocks[i].length;j++){
+                for(int k = 0;k<blocks[j].length;k++){
+                    y[j][k] = blocks[i][j][k][0];
+                    cb[j][k] = blocks[i][j][k][1];
+                    cr[j][k] = blocks[i][j][k][2];
+                }
+            }
+            if(command.equals("applyIDCT")){
+                y = applyIDCT(y);
+                cb = applyIDCT(cb);
+                cr = applyIDCT(cr);
+            } else if(command.equals("multiplyWithCosines")){
+                y = multiplyWithCosines(y);
+                cb = multiplyWithCosines(cb);
+                cr = multiplyWithCosines(cr);
+            }
+            
+            for(int j = 0;j<blocks[i].length;j++){
+                for(int k = 0;k<blocks[j].length;k++){
+                    blocks[i][j][k][0] = y[j][k];
+                    blocks[i][j][k][1] = cb[j][k];
+                    blocks[i][j][k][2] = cr[j][k];
+                }
+            }
+        }
+        return blocks;
     }
     
     /**
-     * Multiply a single block with cosines
-     * @param block
+     * Multiply a single 8*8 block with cosines
+     * @param f
      * @return
      */
-    public double[][] multiplyWithCosines(int[][] block, int n){
-        double[][] matrix = new double[n][n];
-        // k on rivinumero, siis jokaiselle riville
-        for(int u = 0;u<n;u++){
-            for(int v = 0;v<n;v++){
-                matrix[u][v] = 0;
-                for(int i = 0;i<n;i++){
-                    for(int j = 0;j<n;j++){
-                        matrix[u][v] += block[i][j] * Math.cos(Math.PI/(n))*(i+0.5)*u *Math.cos(Math.PI/(n))*(j+0.5)*v;
-                    }
-                }
-                System.out.println("arvo: " + matrix[u][v]);
-                
-            }
-        }
-        return matrix;
-    }
     
-    public double[][] applyDCT(int[][] f) {
+    public double[][] multiplyWithCosines(double[][] f) {
         int n = this.n;
         double[][] F = new double[n][n];
         for (int u=0;u<n;u++) {
@@ -82,6 +102,28 @@ public class Transformer {
           }
         }
         return F;
+    }
+    
+    /**
+     * Reverse DCT cosine multiplying for 8*8 block
+     * @param F
+     * @return
+     */
+    public double[][] applyIDCT(double[][] F) {
+        int n = this.n;
+        double[][] f = new double[n][n];
+        for (int i=0;i<n;i++) {
+          for (int j=0;j<n;j++) {
+            double sum = 0.0;
+            for (int u=0;u<n;u++) {
+              for (int v=0;v<n;v++) {
+                sum+=(c[u]*c[v])/4.0*Math.cos(((2*i+1)/(2.0*n))*u*Math.PI)*Math.cos(((2*j+1)/(2.0*n))*v*Math.PI)*F[u][v];
+              }
+            }
+            f[i][j]=Math.round(sum);
+          }
+        }
+        return f;
     }
 
     

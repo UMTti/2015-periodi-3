@@ -16,12 +16,12 @@ import java.util.*;
 public class Preprocessor {
 
     /**
-     *
+     * Blocks, 4D array which stores all data
      */
-    public int blocks[][][][];
+    public double blocks[][][][];
 
     /**
-     *
+     * Constructor for Preprocessor object
      */
     public Preprocessor() {
         this.blocks = blocks;
@@ -42,8 +42,8 @@ public class Preprocessor {
         FileInputStream fis = new FileInputStream(file);
         //byte[] arr = new byte[(int) file.length()];
         int count = (x * y) / (8 * 8);
-        System.out.println("Count: " + count);
-        this.blocks = new int[count][8][8][3];
+        //System.out.println("Count: " + count);
+        this.blocks = new double[count][8][8][3];
         int maara = 0;
         int position = 0;
         int px = 0;
@@ -92,14 +92,14 @@ public class Preprocessor {
     }
 
     /**
-     *
+     * Prints all values of double[][][][] blocks. 
      */
-    public void printBlocks() {
-        for (int i = 0; i < this.blocks.length; i++) {
-            for (int j = 0; j < this.blocks[i].length; j++) {
-                for (int k = 0; k < this.blocks[i][j].length; k++) {
+    public void printBlocks(double[][][][] blocks) {
+        for (int i = 0; i < blocks.length; i++) {
+            for (int j = 0; j < blocks[i].length; j++) {
+                for (int k = 0; k < blocks[i][j].length; k++) {
                     for(int z=0;z<3;z++){
-                        System.out.println(this.blocks[i][j][k][z]);
+                        System.out.println(blocks[i][j][k][z]);
                     }
                     System.out.println("");
                 }
@@ -113,10 +113,10 @@ public class Preprocessor {
      * @param block
      * @return
      */
-    public int[] convertToYCbCr(int[] block){
-        int r = block[0];
-        int g = block[1];
-        int b = block[2];
+    public double[] convertToYCbCr(double[] block){
+        double r = block[0];
+        double g = block[1];
+        double b = block[2];
         int Y = (int)(0.257 * r + 0.50 * g + 0.098 * b + 16);
 
         int Cb = (int)(-0.148 * r - 0.291 * g + 0.439 * b + 128);
