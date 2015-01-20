@@ -62,13 +62,19 @@ public class Transformer {
                 }
             }
             if(command.equals("applyIDCT")){
+                y = deQuantize(y);
                 y = applyIDCT(y);
+                cb = deQuantize(cb);
                 cb = applyIDCT(cb);
+                cr = deQuantize(cr);
                 cr = applyIDCT(cr);
-            } else if(command.equals("multiplyWithCosines")){
+            } else if(command.equals("DCT")){
                 y = DCT(y);
+                y = quantize(y);
                 cb = DCT(cb);
+                cb = quantize(cb);
                 cr = DCT(cr);
+                cr = quantize(cr);
             }
             
             for(int j = 0;j<blocks[i].length;j++){
@@ -126,6 +132,36 @@ public class Transformer {
           }
         }
         return f;
+    }
+    
+    /**
+     * Function to quantize a block with DCT application
+     * @param block
+     * @return
+     */
+    public double[][] quantize(double[][] block){
+        int n = this.n;
+        for(int i = 0;i<n;i++){
+            for(int j = 0;j<n;j++){
+                block[i][j] = Math.round(block[i][j] / this.quantizationmatrix[j][i]);
+            }
+        }
+        return block;
+    }
+    
+    /**
+     * Function to dequantize a block before IDCT
+     * @param block
+     * @return
+     */
+    public double[][] deQuantize(double[][] block){
+        int n = this.n;
+        for(int i = 0;i<n;i++){
+            for(int j = 0;j<n;j++){
+                block[i][j] = block[i][j] * this.quantizationmatrix[j][i];
+            }
+        }
+        return block;
     }
 
     
