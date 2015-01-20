@@ -15,6 +15,7 @@ public class Transformer {
      *
      */
     public double[][][][] blocks;
+    private double[][] quantizationmatrix;
 
     private int n;
     private double[] c;
@@ -24,6 +25,7 @@ public class Transformer {
      */
     public Transformer(double[][][][] blocks){
         this.blocks = blocks;
+        this.quantizationmatrix = new double[][]{ {16, 11, 10, 16, 24, 40, 51, 61} , {12, 12, 14, 19, 26, 58, 60, 55 }, {14, 13, 16, 24, 40, 57, 69, 56 }, { 14, 17, 22, 29, 51, 87, 80, 62}, { 18, 22, 37, 56, 68, 109, 103, 77}, {24, 35, 55, 64, 81, 104, 113, 92 }, { 49, 64, 78, 87, 103, 121, 120, 101 }, {72, 92, 95, 98, 112, 100, 103, 99 } };
         this.n= 8;
         this.initializeCoefficients();
         
@@ -64,9 +66,9 @@ public class Transformer {
                 cb = applyIDCT(cb);
                 cr = applyIDCT(cr);
             } else if(command.equals("multiplyWithCosines")){
-                y = multiplyWithCosines(y);
-                cb = multiplyWithCosines(cb);
-                cr = multiplyWithCosines(cr);
+                y = DCT(y);
+                cb = DCT(cb);
+                cr = DCT(cr);
             }
             
             for(int j = 0;j<blocks[i].length;j++){
@@ -86,7 +88,7 @@ public class Transformer {
      * @return
      */
     
-    public double[][] multiplyWithCosines(double[][] f) {
+    public double[][] DCT(double[][] f) {
         int n = this.n;
         double[][] F = new double[n][n];
         for (int u=0;u<n;u++) {
