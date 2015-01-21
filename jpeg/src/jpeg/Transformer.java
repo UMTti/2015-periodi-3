@@ -143,7 +143,7 @@ public class Transformer {
         int n = this.n;
         for(int i = 0;i<n;i++){
             for(int j = 0;j<n;j++){
-                block[i][j] = Math.round(block[i][j] / this.quantizationmatrix[j][i]);
+                block[i][j] = Math.round(block[i][j] / this.quantizationmatrix[i][j]);
             }
         }
         return block;
@@ -158,7 +158,7 @@ public class Transformer {
         int n = this.n;
         for(int i = 0;i<n;i++){
             for(int j = 0;j<n;j++){
-                block[i][j] = block[i][j] * this.quantizationmatrix[j][i];
+                block[i][j] = block[i][j] * this.quantizationmatrix[i][j];
             }
         }
         return block;

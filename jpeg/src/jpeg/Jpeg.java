@@ -22,7 +22,7 @@ public class Jpeg {
         p.separate("kuva.rgb", "rgb", 64, 64);
         p.decreaseBlocks(127);
         Transformer t = new Transformer(p.blocks);
-        t.blocks = t.doForBlocks(t.blocks, "multiplyWithCosines");
+        t.blocks = t.doForBlocks(t.blocks, "DCT");
         p.printBlocks(t.blocks);
         t.blocks = t.doForBlocks(t.blocks, "applyIDCT");
         p.printBlocks(t.blocks);
