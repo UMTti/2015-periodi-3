@@ -16,7 +16,6 @@ public class Transformer {
      */
     public double[][][][] blocks;
     private double[][] quantizationmatrix;
-
     private int n;
     private double[] c;
     /**

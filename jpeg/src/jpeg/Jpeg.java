@@ -19,13 +19,14 @@ public class Jpeg {
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
         Preprocessor p = new Preprocessor();
-        p.separate("kuva.rgb", "rgb", 64, 64);
+        p.separate("kuva2.rgb", "rgb", 64, 64);
         p.decreaseBlocks(127);
         Transformer t = new Transformer(p.blocks);
         t.blocks = t.doForBlocks(t.blocks, "DCT");
         p.printBlocks(t.blocks);
         t.blocks = t.doForBlocks(t.blocks, "applyIDCT");
         p.printBlocks(t.blocks);
+        p.writeToRgbFile(t.blocks);
         
     }
     
