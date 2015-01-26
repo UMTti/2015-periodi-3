@@ -22,11 +22,17 @@ public class Jpeg {
         p.separate("kuva2.rgb", "rgb", 64, 64);
         p.decreaseBlocks(127);
         Transformer t = new Transformer(p.blocks);
-        t.blocks = t.doForBlocks(t.blocks, "DCT");
+        /*t.blocks = t.doForBlocks(t.blocks, "DCT");
         p.printBlocks(t.blocks);
         t.blocks = t.doForBlocks(t.blocks, "applyIDCT");
         p.printBlocks(t.blocks);
-        p.writeToRgbFile(t.blocks);
+        p.writeToRgbFile(t.blocks);*/
+        double[] uusi = new double[]{2, 2, 2};
+        p.convertToYCbCr(uusi);
+        p.convertToRgb(uusi);
+        for(int i = 0;i<uusi.length;i++){
+            System.out.println(uusi[i]);
+        }
         
     }
     

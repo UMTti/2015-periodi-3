@@ -61,19 +61,19 @@ public class Transformer {
                 }
             }
             if(command.equals("applyIDCT")){
-                y = deQuantize(y);
+                //y = deQuantize(y);
                 y = applyIDCT(y);
-                cb = deQuantize(cb);
+                //cb = deQuantize(cb);
                 cb = applyIDCT(cb);
-                cr = deQuantize(cr);
+                //cr = deQuantize(cr);
                 cr = applyIDCT(cr);
             } else if(command.equals("DCT")){
                 y = DCT(y);
-                y = quantize(y);
+                //y = quantize(y);
                 cb = DCT(cb);
-                cb = quantize(cb);
+                //cb = quantize(cb);
                 cr = DCT(cr);
-                cr = quantize(cr);
+                //cr = quantize(cr);
             }
             
             for(int j = 0;j<blocks[i].length;j++){
@@ -127,7 +127,11 @@ public class Transformer {
                 sum+=(c[u]*c[v])/4.0*Math.cos(((2*i+1)/(2.0*n))*u*Math.PI)*Math.cos(((2*j+1)/(2.0*n))*v*Math.PI)*F[u][v];
               }
             }
-            f[i][j]=Math.round(sum);
+            if(sum >= 0){
+                f[i][j]=Math.floor(sum);
+            } else {
+                f[i][j] = Math.ceil(sum);
+            }
           }
         }
         return f;
@@ -142,7 +146,12 @@ public class Transformer {
         int n = this.n;
         for(int i = 0;i<n;i++){
             for(int j = 0;j<n;j++){
-                block[i][j] = Math.round(block[i][j] / this.quantizationmatrix[i][j]);
+                double arvo = block[i][j] / this.quantizationmatrix[i][j];
+                if(arvo >= 0){
+                    block[i][j] = Math.floor(arvo);
+                } else {
+                    block[i][j] = Math.ceil(arvo);
+                }
             }
         }
         return block;
