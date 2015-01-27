@@ -123,19 +123,48 @@ public class Preprocessor {
      * @return
      */
     public double[] convertToYCbCr(double[] block) {
+
         double r = block[0];
         double g = block[1];
         double b = block[2];
-        int Y = (int) (0.257 * r + 0.50 * g + 0.098 * b + 16);
 
-        int Cb = (int) (-0.148 * r - 0.291 * g + 0.439 * b + 128);
-
-        int Cr = (int) (0.439 * r - 0.368 * g - 0.071 * b + 128);
+        double Y = 0.299 * r + 0.587 * g + 0.114 * b;
+        double cb = -0.1687 * r - 0.3313 * g + 0.5 * b + 128;
+        double cr = 0.5 * r - 0.4187 * g - 0.0813 * b + 128;
 
         block[0] = Y;
-        block[1] = Cb;
-        block[2] = Cr;
+        block[1] = cb;
+        block[2] = cr;
         return block;
+    }
+
+    public double[] convertToRgb(double[] block) {
+        double[] uusi = new double[3];
+        double Y = block[0];
+        double cb = block[1];
+        double cr = block[2];
+
+        double r = Y + 1.402 * (cr - 128);
+        double g = Y - 0.34414*(cb - 128) - 0.71414*(cr - 128);
+        double b = Y + 1.772*(cb - 128);
+        
+        r = validateRGB(r);
+        g = validateRGB(g);
+        b = validateRGB(b);
+        uusi[0] = r;
+        uusi[1] = g;
+        uusi[2] = b;
+        return uusi;
+    }
+    
+    public double validateRGB(double a){
+        if(a > 255){
+            return 255;
+        }
+        if(a < 0){
+            return 0;
+        }
+        return Math.floor(a);
     }
 
     public void writeToRgbFile(double[][][][] blocks) throws IOException {
@@ -152,7 +181,11 @@ public class Preprocessor {
         while (i < (x * y)) {
             double[] arvot = blocks[position][px][py];
             for (int j = 0; j < arvot.length; j++) {
-                BigInteger bigInt = BigInteger.valueOf((int) arvot[j] + 127);
+                arvot[j] += 127;
+            }
+            arvot = convertToRgb(arvot);
+            for (int j = 0; j < arvot.length; j++) {
+                BigInteger bigInt = BigInteger.valueOf((int) arvot[j]);
                 //output.write(bigInt.byteValue());
                 os.write(bigInt.byteValue());
                 maara++;
@@ -175,7 +208,6 @@ public class Preprocessor {
                 }
             }
         }
-        System.out.println("Yhteensä: " + maara);
         //output.close();
         os.close();
 

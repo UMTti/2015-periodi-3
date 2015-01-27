@@ -5,6 +5,8 @@
  */
 package jpeg;
 
+import java.util.HashSet;
+
 /**
  *
  * @author pihla
@@ -18,6 +20,7 @@ public class Transformer {
     private double[][] quantizationmatrix;
     private int n;
     private double[] c;
+    public static HashSet<Integer> hashi = new HashSet<Integer>();
     /**
      * 
      * @param blocks
@@ -61,19 +64,20 @@ public class Transformer {
                 }
             }
             if(command.equals("applyIDCT")){
-                //y = deQuantize(y);
+                y = deQuantize(y);
                 y = applyIDCT(y);
-                //cb = deQuantize(cb);
+                cb = deQuantize(cb);
                 cb = applyIDCT(cb);
-                //cr = deQuantize(cr);
+                cr = deQuantize(cr);
                 cr = applyIDCT(cr);
             } else if(command.equals("DCT")){
                 y = DCT(y);
-                //y = quantize(y);
+                y = quantize(y);
                 cb = DCT(cb);
-                //cb = quantize(cb);
+                cb = quantize(cb);
                 cr = DCT(cr);
-                //cr = quantize(cr);
+                cr = quantize(cr);
+          
             }
             
             for(int j = 0;j<blocks[i].length;j++){
@@ -84,6 +88,7 @@ public class Transformer {
                 }
             }
         }
+        System.out.println("Hashin koko: " + hashi.size());
         return blocks;
     }
     
@@ -106,6 +111,7 @@ public class Transformer {
             }
             sum*=((c[u]*c[v])/4.0);
             F[u][v]=sum;
+            hashi.add((int)sum);
           }
         }
         return F;
@@ -152,6 +158,7 @@ public class Transformer {
                 } else {
                     block[i][j] = Math.ceil(arvo);
                 }
+                //block[i][j] = Math.round(arvo);
             }
         }
         return block;
