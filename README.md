@@ -1,4 +1,4 @@
-# JPEG compressing algorithm 
+# JPEG-like compressing algorithm 
 
 JPEG based image compression. Actually the same parts as in JPEG and now ready are:
 
