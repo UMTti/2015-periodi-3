@@ -20,7 +20,15 @@ public class Preprocessor {
      * Blocks, 4D array which stores all data
      */
     public double blocks[][][][];
+
+    /**
+     * Size of x-axel
+     */
     public int x;
+
+    /**
+     * Size of y-axel
+     */
     public int y;
 
     /**
@@ -101,6 +109,7 @@ public class Preprocessor {
 
     /**
      * Prints all values of double[][][][] blocks.
+     * @param blocks
      */
     public void printBlocks(double[][][][] blocks) {
         for (int i = 0; i < blocks.length; i++) {
@@ -138,6 +147,11 @@ public class Preprocessor {
         return block;
     }
 
+    /**
+     * Converts YCbCr -block to RGB
+     * @param block
+     * @return
+     */
     public double[] convertToRgb(double[] block) {
         double[] uusi = new double[3];
         double Y = block[0];
@@ -157,6 +171,11 @@ public class Preprocessor {
         return uusi;
     }
     
+    /**
+     * Validates RGB
+     * @param a
+     * @return
+     */
     public double validateRGB(double a){
         if(a > 255){
             return 255;
@@ -167,6 +186,11 @@ public class Preprocessor {
         return Math.floor(a);
     }
 
+    /**
+     * Writes data to RGB file
+     * @param blocks
+     * @throws IOException
+     */
     public void writeToRgbFile(double[][][][] blocks) throws IOException {
         int i = 0;
         int position = 0;

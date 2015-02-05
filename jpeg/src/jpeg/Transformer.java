@@ -5,7 +5,6 @@
  */
 package jpeg;
 
-import java.util.HashSet;
 
 /**
  *
@@ -13,14 +12,10 @@ import java.util.HashSet;
  */
 public class Transformer {
     
-    /**
-     *
-     */
     public double[][][][] blocks;
     private double[][] quantizationmatrix;
     private int n;
     private double[] c;
-    public static HashSet<Integer> hashi = new HashSet<Integer>();
     /**
      * 
      * @param blocks
@@ -33,6 +28,9 @@ public class Transformer {
         
     }
     
+    /**
+     * Initialize coefficients
+     */
     private void initializeCoefficients() {
         this.c = new double[this.n];
         for (int i=1;i<this.n;i++) {
@@ -88,7 +86,6 @@ public class Transformer {
                 }
             }
         }
-        System.out.println("Hashin koko: " + hashi.size());
         return blocks;
     }
     
@@ -111,7 +108,6 @@ public class Transformer {
             }
             sum*=((c[u]*c[v])/4.0);
             F[u][v]=sum;
-            hashi.add((int)sum);
           }
         }
         return F;
