@@ -106,6 +106,18 @@ public class Preprocessor {
             }
         }
     }
+    
+    public void increaseBlocks(int value) {
+        for (int i = 0; i < this.blocks.length; i++) {
+            for (int j = 0; j < this.blocks[i].length; j++) {
+                for (int k = 0; k < this.blocks[i][j].length; k++) {
+                    for (int z = 0; z < 3; z++) {
+                        this.blocks[i][j][k][z] += 127;
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * Prints all values of double[][][][] blocks.

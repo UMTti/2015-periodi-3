@@ -5,6 +5,11 @@
  */
 package jpeg;
 
+import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -41,13 +46,25 @@ public class HuffmanCoder {
             this.left = left;
             this.right = right;
         }
+        
+        /**
+         * Checks if node is leaf 
+        */
+
+        private boolean isLeaf() {
+            if(this.right == null && this.left == null){
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     private static class HeapComparator implements Comparator<Node> {
 
         @Override
         public int compare(Node x, Node y) {
-            
+
             if (x.frequency < y.frequency) {
                 return -1;
             }
@@ -60,40 +77,48 @@ public class HuffmanCoder {
 
     /**
      * Object which handles operations related to huffman coding
+     *
      * @param blocks
      * @param x
      * @param y
      */
+    private String[] koodiarvot;
     public HuffmanCoder(double[][][][] blocks, int x, int y) {
         this.blocks = blocks;
         this.x = x;
         this.y = y;
+        this.koodiarvot = new String[2*x*y*3]; // x*y*3 on nolla
     }
 
     /**
-     * General function which calls makeFreqsTable and constructs the tree of Nodes
+     * General "main" function which calls makeFreqsTable and constructs the tree of
+     * Nodes
      */
-    public void makeHuffmanCoding() {
+    public void makeHuffmanCoding() throws FileNotFoundException, IOException {
         int[] frequencies = makeFreqsTable(this.blocks);
         PriorityQueue<Node> minimumheap = makeMinimumHeap(frequencies);
-        while(minimumheap.size() >= 2){
+        while (minimumheap.size() >= 2) {
             Node eka = minimumheap.remove();
             Node toka = minimumheap.remove();
             int freqsum = eka.frequency + toka.frequency;
             Node uusi = new Node(9000, freqsum, eka, toka);
             minimumheap.add(uusi);
         }
-        
+
         Node vika = minimumheap.remove();
+        buildKoodiarvot(vika, "");
+        writeToFile(vika);
+ 
     }
 
     /**
      * Makes table of frequencies. x*y*3 is zero in values
      *
      * @param blocks
-     * @return 
+     * @return
      */
     public int[] makeFreqsTable(double[][][][] blocks) {
+        HashSet<Integer> erilaiset = new HashSet<Integer>();
         x = this.x;
         y = this.y;
         int nollat = 0;
@@ -104,10 +129,11 @@ public class HuffmanCoder {
                     for (int z = 0; z < 3; z++) {
                         double value = blocks[i][j][k][z];
                         int intti = (int) value;
-                        if(intti == 0){
+                        if (intti == 0) {
                             continue;
                         }
                         frequencies[intti + x * y * 3] += 1;
+                        erilaiset.add(intti);
                     }
                 }
             }
@@ -117,6 +143,7 @@ public class HuffmanCoder {
 
     /**
      * Makes minimum heap of frequencies -> heap sort can be applied later
+     *
      * @param frequencies
      * @return
      */
@@ -135,5 +162,47 @@ public class HuffmanCoder {
         }
         return minimumheap;
     }
+    
+    public void buildKoodiarvot(Node n, String s) {
+        if (! n.isLeaf()) {
+            buildKoodiarvot(n.left,  s + '0');
+            buildKoodiarvot(n.right, s + '1');
+        }
+        else {
+            this.koodiarvot[n.value + x*y*3] = s;
+        }
+    }
+    
+    /**
+     * Number 255 is added for every value, so everything is positive > 
+     * @param n
+     * @param os
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
+    public void writeTrie(Node n, DataOutputStream os) throws FileNotFoundException, IOException{
+        if (n.isLeaf()) {
+            os.writeBoolean(true);
+            BigInteger arvo = BigInteger.valueOf((long)n.value + 255);
+            os.write(arvo.byteValue());
+            return;
+        }
+        os.writeBoolean(false);
+        writeTrie(n.left, os);
+        writeTrie(n.right, os);
+    }
+    
+    public void writeValues(DataOutputStream os) throws FileNotFoundException, IOException{
+        
+    }
+    
+    public void writeToFile(Node vika) throws FileNotFoundException, IOException{
+        String filename = "tulos.gpeg";
+        DataOutputStream os = new DataOutputStream(new FileOutputStream(filename));
+        writeTrie(vika, os);
+        writeValues(os);
+    }
+    
+    
 
 }
