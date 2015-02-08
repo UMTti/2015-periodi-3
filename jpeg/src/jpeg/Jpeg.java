@@ -19,12 +19,12 @@ public class Jpeg {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        Preprocessor p = new Preprocessor();
+        /*Preprocessor p = new Preprocessor();
         p.separate("kuva4.rgb", "rgb", 256, 256);
         p.decreaseBlocks(127);
         Transformer t = new Transformer(p.blocks);
         t.blocks = t.doForBlocks(t.blocks, "DCT");
-        p.printBlocks(t.blocks);
+        p.printBlocks(t.blocks);*/
         //t.blocks = t.doForBlocks(t.blocks, "applyIDCT");
         //p.printBlocks(t.blocks);
         //p.writeToRgbFile(t.blocks);
@@ -34,9 +34,20 @@ public class Jpeg {
         for(int i = 0;i<uusi.length;i++){
             System.out.println(uusi[i]);
         }*/
-        HuffmanCoder h = new HuffmanCoder(t.blocks, 256, 256);
-        h.makeHuffmanCoding();
+        //HuffmanCoder h = new HuffmanCoder(t.blocks, 256, 256);
+        //h.makeHuffmanCoding();
+        test();
         
+    }
+    
+    public static void test() throws IOException{
+        Preprocessor p = new Preprocessor();
+        p.separate("kuva4.rgb", "rgb", 256, 256);
+        p.decreaseBlocks(127);
+        Transformer t = new Transformer(p.blocks);
+        t.blocks = t.doForBlocks(t.blocks, "DCT");
+        t.blocks = t.doForBlocks(t.blocks, "applyIDCT");
+        p.writeToRgbFile(t.blocks);
     }
     
 }
