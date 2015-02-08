@@ -33,31 +33,6 @@ public class HuffmanCoder {
      */
     public int y;
 
-    private static class Node {
-
-        public int frequency;
-        int value;
-        Node left;
-        Node right;
-
-        public Node(int value, int frequency, Node left, Node right) {
-            this.frequency = frequency;
-            this.value = value;
-            this.left = left;
-            this.right = right;
-        }
-
-        /**
-         * Checks if node is leaf
-         */
-        private boolean isLeaf() {
-            if (this.right == null && this.left == null) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
 
     private static class HeapComparator implements Comparator<Node> {
 
@@ -228,7 +203,7 @@ public class HuffmanCoder {
         if (arvo == 0) {
             this.nollat++;
         } else {
-            BinaryStdOut.write(nollat + "", 10);
+            BinaryStdOut.write(this.nollat + "", 10);
             this.nollat = 0;
             String koodi = giveCodeValue((int) arvo);
             for (int a = 0; a < koodi.length(); a++) {
