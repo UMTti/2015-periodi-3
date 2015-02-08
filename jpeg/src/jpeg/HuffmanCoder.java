@@ -82,12 +82,14 @@ public class HuffmanCoder {
      * @param y
      */
     private String[] koodiarvot;
+    private int nollat;
 
     public HuffmanCoder(double[][][][] blocks, int x, int y) {
         this.blocks = blocks;
         this.x = x;
         this.y = y;
         this.koodiarvot = new String[2 * x * y * 3]; // x*y*3 on nolla
+        this.nollat = nollat;
     }
 
     /**
@@ -201,22 +203,7 @@ public class HuffmanCoder {
         while (i < (x * y)) {
             double[] arvot = this.blocks[position][px][py];
             for (int j = 0; j < arvot.length; j++) {
-                if (arvot[j] == 0) {
-                    nollat++;
-                } else {
-                    BinaryStdOut.write(nollat + "", 10);
-                    nollat = 0;
-                    String koodi = giveCodeValue((int) arvot[j]);
-                    for (int a = 0; a < koodi.length(); a++) {
-                        if (koodi.charAt(a) == '0') {
-                            BinaryStdOut.write(false);
-                        } else if (koodi.charAt(a) == '1') {
-                            BinaryStdOut.write(true);
-                        } else {
-                            throw new IllegalStateException("Illegal state");
-                        }
-                    }
-                }
+                writeOneValue((int)arvot[j]);
             }
             px++;
             i++;
@@ -232,6 +219,25 @@ public class HuffmanCoder {
                     position += (x / 8);
                     alkuposition = position;
                     py = 0;
+                }
+            }
+        }
+    }
+
+    public void writeOneValue(int arvo) {
+        if (arvo == 0) {
+            this.nollat++;
+        } else {
+            BinaryStdOut.write(nollat + "", 10);
+            this.nollat = 0;
+            String koodi = giveCodeValue((int) arvo);
+            for (int a = 0; a < koodi.length(); a++) {
+                if (koodi.charAt(a) == '0') {
+                    BinaryStdOut.write(false);
+                } else if (koodi.charAt(a) == '1') {
+                    BinaryStdOut.write(true);
+                } else {
+                    throw new IllegalStateException("Illegal state");
                 }
             }
         }
