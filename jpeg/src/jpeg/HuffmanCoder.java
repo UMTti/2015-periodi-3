@@ -46,13 +46,12 @@ public class HuffmanCoder {
             this.left = left;
             this.right = right;
         }
-        
-        /**
-         * Checks if node is leaf 
-        */
 
+        /**
+         * Checks if node is leaf
+         */
         private boolean isLeaf() {
-            if(this.right == null && this.left == null){
+            if (this.right == null && this.left == null) {
                 return true;
             } else {
                 return false;
@@ -83,16 +82,17 @@ public class HuffmanCoder {
      * @param y
      */
     private String[] koodiarvot;
+
     public HuffmanCoder(double[][][][] blocks, int x, int y) {
         this.blocks = blocks;
         this.x = x;
         this.y = y;
-        this.koodiarvot = new String[2*x*y*3]; // x*y*3 on nolla
+        this.koodiarvot = new String[2 * x * y * 3]; // x*y*3 on nolla
     }
 
     /**
-     * General "main" function which calls makeFreqsTable and constructs the tree of
-     * Nodes
+     * General "main" function which calls makeFreqsTable and constructs the
+     * tree of Nodes
      */
     public void makeHuffmanCoding() throws FileNotFoundException, IOException {
         int[] frequencies = makeFreqsTable(this.blocks);
@@ -108,7 +108,7 @@ public class HuffmanCoder {
         Node vika = minimumheap.remove();
         buildKoodiarvot(vika, "");
         writeToFile(vika);
- 
+
     }
 
     /**
@@ -162,47 +162,95 @@ public class HuffmanCoder {
         }
         return minimumheap;
     }
-    
+
     public void buildKoodiarvot(Node n, String s) {
-        if (! n.isLeaf()) {
-            buildKoodiarvot(n.left,  s + '0');
+        if (!n.isLeaf()) {
+            buildKoodiarvot(n.left, s + '0');
             buildKoodiarvot(n.right, s + '1');
-        }
-        else {
-            this.koodiarvot[n.value + x*y*3] = s;
+        } else {
+            this.koodiarvot[n.value + x * y * 3] = s;
         }
     }
-    
+
     /**
-     * Number 255 is added for every value, so everything is positive > 
+     * Number 255 is added for every value, so everything is positive >
+     *
      * @param n
      * @param os
      * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws IOException
      */
-    public void writeTrie(Node n, DataOutputStream os) throws FileNotFoundException, IOException{
+    public void writeTrie(Node n) throws FileNotFoundException, IOException {
         if (n.isLeaf()) {
-            os.writeBoolean(true);
-            BigInteger arvo = BigInteger.valueOf((long)n.value + 255);
-            os.write(arvo.byteValue());
+            BinaryStdOut.write(true);
+            BinaryStdOut.write(n.value + 255, 9); // 9 bittiä, koska jos joku on esim alussa 200 nii menee yli 255 lisäyksessä
             return;
         }
-        os.writeBoolean(false);
-        writeTrie(n.left, os);
-        writeTrie(n.right, os);
+        BinaryStdOut.write(false);
+        writeTrie(n.left);
+        writeTrie(n.right);
     }
-    
-    public void writeValues(DataOutputStream os) throws FileNotFoundException, IOException{
-        
+
+    public void writeValues() throws FileNotFoundException, IOException {
+        int i = 0;
+        int position = 0;
+        int px = 0;
+        int py = 0;
+        int alkuposition = 0;
+        int nollat = 0;
+
+        while (i < (x * y)) {
+            double[] arvot = this.blocks[position][px][py];
+
+            for (int j = 0; j < arvot.length; j++) {
+
+                if (arvot[j] == 0) {
+                    nollat++;
+                } else {
+                    BinaryStdOut.write(nollat + "", 10);
+                    nollat = 0;
+                    String koodi = giveCodeValue((int) arvot[j]);
+                    for (int a = 0; a < koodi.length(); a++) {
+                        if (koodi.charAt(a) == '0') {
+                            BinaryStdOut.write(false);
+                        } else if (koodi.charAt(a) == '1') {
+                            BinaryStdOut.write(true);
+                        } else {
+                            throw new IllegalStateException("Illegal state");
+                        }
+                    }
+                }
+            }
+
+            px++;
+            i++;
+            if (px == 8) {
+                px = 0;
+                position++;
+            }
+            if (position == alkuposition + (this.x / 8)) {
+                py++;
+                position = alkuposition;
+                if (py == 8) {
+                    // pitaa siirtaa positionia jotenkin
+                    position += (x / 8);
+                    alkuposition = position;
+                    py = 0;
+                }
+            }
+        }
     }
-    
-    public void writeToFile(Node vika) throws FileNotFoundException, IOException{
+
+    public String giveCodeValue(int value) {
+        return this.koodiarvot[value + x * y * 3];
+    }
+
+    public void writeToFile(Node vika) throws FileNotFoundException, IOException {
         String filename = "tulos.gpeg";
-        DataOutputStream os = new DataOutputStream(new FileOutputStream(filename));
-        writeTrie(vika, os);
-        writeValues(os);
+        BinaryStdOut.instantiateFileoutput();
+        writeTrie(vika);
+        writeValues();
+        BinaryStdOut.flush();
     }
-    
-    
 
 }
