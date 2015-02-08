@@ -213,7 +213,7 @@ public class Preprocessor {
 
         //File file = new File("tulos.rgb");
         //BufferedWriter output = new BufferedWriter(new FileWriter(file));
-        DataOutputStream os = new DataOutputStream(new FileOutputStream("tulos2.rgb"));
+        DataOutputStream os = new DataOutputStream(new FileOutputStream("tulos.rgb"));
         while (i < (x * y)) {
             double[] arvot = blocks[position][px][py];
             for (int j = 0; j < arvot.length; j++) {
