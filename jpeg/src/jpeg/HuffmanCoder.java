@@ -198,12 +198,9 @@ public class HuffmanCoder {
         int py = 0;
         int alkuposition = 0;
         int nollat = 0;
-
         while (i < (x * y)) {
             double[] arvot = this.blocks[position][px][py];
-
             for (int j = 0; j < arvot.length; j++) {
-
                 if (arvot[j] == 0) {
                     nollat++;
                 } else {
@@ -221,7 +218,6 @@ public class HuffmanCoder {
                     }
                 }
             }
-
             px++;
             i++;
             if (px == 8) {
