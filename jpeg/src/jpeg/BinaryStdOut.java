@@ -37,7 +37,7 @@ public final class BinaryStdOut {
     }
     
     public static void instantiateFileoutput() throws FileNotFoundException{
-        out = new BufferedOutputStream(new FileOutputStream("tulos"));
+        out = new BufferedOutputStream(new FileOutputStream("tulos.gpeg"));
     }
 
    /**

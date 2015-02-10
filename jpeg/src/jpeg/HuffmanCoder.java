@@ -58,6 +58,7 @@ public class HuffmanCoder {
      */
     private String[] koodiarvot;
     private int nollat;
+    private int kokonaismaara;
 
     public HuffmanCoder(double[][][][] blocks, int x, int y) {
         this.blocks = blocks;
@@ -65,6 +66,7 @@ public class HuffmanCoder {
         this.y = y;
         this.koodiarvot = new String[2 * x * y * 3]; // x*y*3 on nolla
         this.nollat = nollat;
+        this.kokonaismaara = 0;
     }
 
     /**
@@ -98,6 +100,7 @@ public class HuffmanCoder {
         HashSet<Integer> erilaiset = new HashSet<Integer>();
         x = this.x;
         y = this.y;
+        
         int nollat = 0;
         int[] frequencies = new int[2 * x * y * 3];
         for (int i = 0; i < blocks.length; i++) {
@@ -108,6 +111,8 @@ public class HuffmanCoder {
                         int intti = (int) value;
                         if (intti == 0) {
                             continue;
+                        } else {
+                            this.kokonaismaara++;
                         }
                         frequencies[intti + x * y * 3] += 1;
                         erilaiset.add(intti);
@@ -160,7 +165,7 @@ public class HuffmanCoder {
     public void writeTrie(Node n) throws FileNotFoundException, IOException {
         if (n.isLeaf()) {
             BinaryStdOut.write(true);
-            BinaryStdOut.write(n.value + 255, 9); // 9 bittiä, koska jos joku on esim alussa 200 nii menee yli 255 lisäyksessä
+            BinaryStdOut.write(n.value + 255, 16); // 9 bittiä, koska jos joku on esim alussa 200 nii menee yli 255 lisäyksessä
             return;
         }
         BinaryStdOut.write(false);
@@ -203,7 +208,7 @@ public class HuffmanCoder {
         if (arvo == 0) {
             this.nollat++;
         } else {
-            BinaryStdOut.write(this.nollat + "", 10);
+            BinaryStdOut.write(this.nollat);
             this.nollat = 0;
             String koodi = giveCodeValue((int) arvo);
             for (int a = 0; a < koodi.length(); a++) {
@@ -226,6 +231,7 @@ public class HuffmanCoder {
         String filename = "tulos.gpeg";
         BinaryStdOut.instantiateFileoutput();
         writeTrie(vika);
+        BinaryStdOut.write(this.kokonaismaara, 32);
         writeValues();
         BinaryStdOut.flush();
     }

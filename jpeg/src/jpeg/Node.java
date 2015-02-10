@@ -15,6 +15,7 @@ public class Node {
         int value;
         Node left;
         Node right;
+        String temparvo;
 
         public Node(int value, int frequency, Node left, Node right) {
             this.frequency = frequency;
@@ -22,6 +23,14 @@ public class Node {
             this.left = left;
             this.right = right;
         }
+        
+        public Node(String temparvo, int frequency, Node left, Node right) {
+            this.frequency = frequency;
+            this.left = left;
+            this.right = right;
+            this.temparvo = "";
+        }
+
 
         /**
          * Checks if node is leaf

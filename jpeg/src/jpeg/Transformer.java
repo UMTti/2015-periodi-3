@@ -144,6 +144,7 @@ public class Transformer {
      * @param block
      * @return
      */
+    
     public double[][] quantize(double[][] block){
         int n = this.n;
         for(int i = 0;i<n;i++){
