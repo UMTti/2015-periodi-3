@@ -26,8 +26,9 @@ public class Decoder {
     private int alkuposition;
     private int j;
     public BinaryIn b;
+    private String filename;
 
-    public Decoder(int x, int y) throws FileNotFoundException { 
+    public Decoder(int x, int y, String filename) throws FileNotFoundException { 
         this.x = x;
         this.y = y;
         int count = (x * y) / (8 * 8);
@@ -38,10 +39,11 @@ public class Decoder {
         this.py = 0;
         this.alkuposition = 0;
         this.j = 0;
+        this.filename = filename;
     }
 
     public void readAll() throws FileNotFoundException{     
-        b = new BinaryIn("tulos.gpeg");
+        b = new BinaryIn(this.filename);
         //BinaryStdIn.instantiateFileinput();
         //BinaryStdIn.instantiateFileinput();
         Node juuri = readTree();

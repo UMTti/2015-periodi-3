@@ -18,25 +18,8 @@ public class Jpeg {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-        // TODO code application logic here
-        /*Preprocessor p = new Preprocessor();
-        p.separate("kuva4.rgb", "rgb", 256, 256);
-        p.decreaseBlocks(127);
-        Transformer t = new Transformer(p.blocks);
-        t.blocks = t.doForBlocks(t.blocks, "DCT");
-        p.printBlocks(t.blocks);*/
-        //t.blocks = t.doForBlocks(t.blocks, "applyIDCT");
-        //p.printBlocks(t.blocks);
-        //p.writeToRgbFile(t.blocks);
-        /*double[] uusi = new double[]{2, 2, 2};
-        uusi = p.convertToYCbCr(uusi);
-        uusi = p.convertToRgb(uusi);
-        for(int i = 0;i<uusi.length;i++){
-            System.out.println(uusi[i]);
-        }*/
-        //HuffmanCoder h = new HuffmanCoder(t.blocks, 256, 256);
-        //h.makeHuffmanCoding();
-        test();
+        
+        testi2();
         
     }
     
@@ -48,6 +31,29 @@ public class Jpeg {
         t.blocks = t.doForBlocks(t.blocks, "DCT");
         t.blocks = t.doForBlocks(t.blocks, "applyIDCT");
         p.writeToRgbFile(t.blocks);
+    }
+    
+    public static void testi2() throws IOException{
+        String outputfile = "tulos.gpeg";
+        String inputfile = "kuva4.rgb";
+        Preprocessor p = new Preprocessor();
+        p.separate(inputfile, "rgb", 256, 256);
+        p.decreaseBlocks(127);
+        Transformer t = new Transformer(p.blocks);
+        t.blocks = t.doForBlocks(t.blocks, "DCT");
+     
+        HuffmanCoder h = new HuffmanCoder(t.blocks, 256, 256, outputfile);
+        h.makeHuffmanCoding();
+        
+        Decoder d = new Decoder(256, 256, outputfile);
+        d.readAll();
+        
+        d.blocks = t.doForBlocks(d.blocks, "applyIDCT");
+        p.blocks = d.blocks;
+        //p.increaseBlocks(127);
+        p.writeToRgbFile(p.blocks);
+        
+        
     }
     
 }

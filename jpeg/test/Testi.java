@@ -22,16 +22,18 @@ public class Testi {
     
     @Test
     public void testaaHuffman() throws IOException {
+        String outputfile = "tulos.gpeg";
+        String inputfile = "kuva4.rgb";
         Preprocessor p = new Preprocessor();
-        p.separate("kuva4.rgb", "rgb", 256, 256);
+        p.separate(inputfile, "rgb", 256, 256);
         p.decreaseBlocks(127);
         Transformer t = new Transformer(p.blocks);
         t.blocks = t.doForBlocks(t.blocks, "DCT");
      
-        HuffmanCoder h = new HuffmanCoder(t.blocks, 256, 256);
+        HuffmanCoder h = new HuffmanCoder(t.blocks, 256, 256, outputfile);
         h.makeHuffmanCoding();
         
-        Decoder d = new Decoder(256, 256);
+        Decoder d = new Decoder(256, 256, outputfile);
         d.readAll();
         
         assertFalse(Arrays.equals(t.blocks, d.blocks));

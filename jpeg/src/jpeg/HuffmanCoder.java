@@ -59,14 +59,16 @@ public class HuffmanCoder {
     private String[] koodiarvot;
     private int nollat;
     private int kokonaismaara;
+    private String filename;
 
-    public HuffmanCoder(double[][][][] blocks, int x, int y) {
+    public HuffmanCoder(double[][][][] blocks, int x, int y, String filename) {
         this.blocks = blocks;
         this.x = x;
         this.y = y;
         this.koodiarvot = new String[2 * x * y * 3]; // x*y*3 on nolla
         this.nollat = nollat;
         this.kokonaismaara = 0;
+        this.filename = filename;
     }
 
     /**
@@ -228,8 +230,8 @@ public class HuffmanCoder {
     }
 
     public void writeToFile(Node vika) throws FileNotFoundException, IOException {
-        String filename = "tulos.gpeg";
-        BinaryStdOut.instantiateFileoutput();
+        String filename = this.filename;
+        BinaryStdOut.instantiateFileoutput(filename);
         writeTrie(vika);
         BinaryStdOut.write(this.kokonaismaara, 32);
         writeValues();
