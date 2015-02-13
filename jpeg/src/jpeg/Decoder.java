@@ -18,6 +18,10 @@ public class Decoder {
 
     private int x;
     private int y;
+
+    /**
+     *
+     */
     public double[][][][] blocks;
     private int px;
     private int py;
@@ -25,9 +29,20 @@ public class Decoder {
     private int position;
     private int alkuposition;
     private int j;
+
+    /**
+     *
+     */
     public BinaryIn b;
     private String filename;
 
+    /**
+     * Object which handles decoder attributes
+     * @param x
+     * @param y
+     * @param filename
+     * @throws FileNotFoundException
+     */
     public Decoder(int x, int y, String filename) throws FileNotFoundException { 
         this.x = x;
         this.y = y;
@@ -42,6 +57,10 @@ public class Decoder {
         this.filename = filename;
     }
 
+    /**
+     *
+     * @throws FileNotFoundException
+     */
     public void readAll() throws FileNotFoundException{     
         b = new BinaryIn(this.filename);
         //BinaryStdIn.instantiateFileinput();
@@ -51,6 +70,10 @@ public class Decoder {
         //BinaryStdIn.close();
     }
 
+    /**
+     * Read trie
+     * @return
+     */
     public Node readTree() {
         boolean totuusarvo = b.readBoolean();
         if (totuusarvo == true) {
@@ -60,6 +83,10 @@ public class Decoder {
         }
     }
 
+    /**
+     * Put zeros to blocks 
+     * @param nollat amount of zeros
+     */
     public void taytaNollat(int nollat) {
         for (int i = 0; i < nollat; i++) {
             laitaArvo(0);
@@ -67,6 +94,10 @@ public class Decoder {
 
     }
 
+    /**
+     * Put a single value to blocks -table
+     * @param arvo
+     */
     public void laitaArvo(int arvo) {
 
         this.blocks[position][px][py][j] = arvo;
@@ -93,6 +124,7 @@ public class Decoder {
 
     /**
      * Read data to blocks[][], then quantizing and DCT
+     * @param juuri
      */
     public void readDataToBlocks(Node juuri) {
         int length = b.readInt();
