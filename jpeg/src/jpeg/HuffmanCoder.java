@@ -33,7 +33,9 @@ public class HuffmanCoder {
      */
     public int y;
 
-
+    /**
+     * Minimum heap comparator class
+     */
     private static class HeapComparator implements Comparator<Node> {
 
         @Override
@@ -61,6 +63,13 @@ public class HuffmanCoder {
     private int kokonaismaara;
     private String filename;
 
+    /**
+     *
+     * @param blocks
+     * @param x
+     * @param y
+     * @param filename
+     */
     public HuffmanCoder(double[][][][] blocks, int x, int y, String filename) {
         this.blocks = blocks;
         this.x = x;
@@ -74,6 +83,8 @@ public class HuffmanCoder {
     /**
      * General "main" function which calls makeFreqsTable and constructs the
      * tree of Nodes
+     * @throws java.io.FileNotFoundException
+     * @throws java.io.IOException
      */
     public void makeHuffmanCoding() throws FileNotFoundException, IOException {
         int[] frequencies = makeFreqsTable(this.blocks);
@@ -147,6 +158,11 @@ public class HuffmanCoder {
         return minimumheap;
     }
 
+    /**
+     * Build code values -table
+     * @param n
+     * @param s
+     */
     public void buildKoodiarvot(Node n, String s) {
         if (!n.isLeaf()) {
             buildKoodiarvot(n.left, s + '0');
@@ -160,7 +176,6 @@ public class HuffmanCoder {
      * Number 255 is added for every value, so everything is positive >
      *
      * @param n
-     * @param os
      * @throws FileNotFoundException
      * @throws IOException
      */
@@ -175,6 +190,11 @@ public class HuffmanCoder {
         writeTrie(n.right);
     }
 
+    /**
+     * Write values after writing a trie
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public void writeValues() throws FileNotFoundException, IOException {
         int i = 0;
         int position = 0;
@@ -206,6 +226,10 @@ public class HuffmanCoder {
         }
     }
 
+    /**
+     * Write one value to file
+     * @param arvo
+     */
     public void writeOneValue(int arvo) {
         if (arvo == 0) {
             this.nollat++;
@@ -225,10 +249,21 @@ public class HuffmanCoder {
         }
     }
 
+    /**
+     * Give code value of one value
+     * @param value
+     * @return
+     */
     public String giveCodeValue(int value) {
         return this.koodiarvot[value + x * y * 3];
     }
 
+    /**
+     * General function to write the whole image to file
+     * @param vika
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public void writeToFile(Node vika) throws FileNotFoundException, IOException {
         String filename = this.filename;
         BinaryStdOut.instantiateFileoutput(filename);
