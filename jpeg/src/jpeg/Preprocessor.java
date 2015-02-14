@@ -216,9 +216,6 @@ public class Preprocessor {
         DataOutputStream os = new DataOutputStream(new FileOutputStream("tulos.rgb"));
         while (i < (x * y)) {
             double[] arvot = blocks[position][px][py];
-            for (int j = 0; j < arvot.length; j++) {
-                arvot[j] += 127;
-            }
             arvot = convertToRgb(arvot);
             for (int j = 0; j < arvot.length; j++) {
                 BigInteger bigInt = BigInteger.valueOf((int) arvot[j]);

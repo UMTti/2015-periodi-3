@@ -50,8 +50,10 @@ public class Jpeg {
         
         d.blocks = t.doForBlocks(d.blocks, "applyIDCT");
         p.blocks = d.blocks;
+        p.increaseBlocks(127);
         //p.increaseBlocks(127);
-        p.writeToRgbFile(p.blocks);
+        SwingModule s = new SwingModule(256, 256, p.blocks, p);
+        s.teeKuva();
         
         
     }
