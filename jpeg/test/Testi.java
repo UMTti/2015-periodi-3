@@ -64,7 +64,7 @@ public class Testi {
         assertArrayEquals(testi, uusi);
     }
     
-    @Test
+    /*@Test
     public void testaaTransformaatio() throws IOException{
         double[][] testi = new double[8][8];
         for(int i = 0;i<8;i++){
@@ -82,5 +82,14 @@ public class Testi {
             }
         }
         assertArrayEquals(testi, uusi);
+    }*/
+    
+    @Test
+    public void testaaPQ(){
+        PQ pq = new PQ();
+        pq.add(new Node(1, 2, null, null));
+        pq.add(new Node(1, 3, null, null));
+        pq.add(new Node(1, 4, null, null));
+        assertSame(2, pq.remove().frequency);
     }
 }
