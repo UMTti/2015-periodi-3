@@ -142,9 +142,7 @@ public class HuffmanCoder {
      * @param frequencies
      * @return
      */
-    public PQ makeMinimumHeap(int[] frequencies) {
-        //Comparator<Node> comparator = new HeapComparator();
-        //PriorityQueue<Node> minimumheap = new PriorityQueue<Node>(2 * 3 * this.x * this.y, comparator);
+    public PQ makeMinimumHeap(int[] frequencies) {       
         PQ minimumheap = new PQ();
         for (int i = 0; i < frequencies.length; i++) {
             if (frequencies[i] == 0) {

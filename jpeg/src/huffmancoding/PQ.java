@@ -11,11 +11,16 @@ import java.util.*;
  *
  * @author pihla
  */
-public class PQ {
+public class PQ extends AbstractCollection {
 
     private Comparator c;
     private ArrayList<Node> lista;
     private int size;
+
+    @Override
+    public Iterator iterator() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     private static class HeapComparator implements Comparator<Node> {
         @Override

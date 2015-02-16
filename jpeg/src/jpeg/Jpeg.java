@@ -22,14 +22,6 @@ public class Jpeg {
         
         //SuorituskykyTestit.mustatIso();
         testi2();
-        /*PQ keko = new PQ();
-        Node eka = new Node(1, 3, null, null);
-        Node toka = new Node(1, 1, null, null);
-        keko.add(eka);
-        keko.add(toka);
-        Node poisto = keko.remove();
-        System.out.println(poisto.frequency + "Frekvenssi");*/
-        
         
     }
     
@@ -65,7 +57,6 @@ public class Jpeg {
         //p.increaseBlocks(127);
         SwingModule s = new SwingModule(256, 256, p.blocks, p);
         s.teeKuva();
-        
         
     }
     
