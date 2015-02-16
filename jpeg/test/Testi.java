@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import datastructures.*;
 import huffmancoding.*;
 import java.io.IOException;
 import java.util.Arrays;

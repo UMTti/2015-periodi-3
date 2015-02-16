@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package huffmancoding;
+package datastructures;
 
 /**
  *
@@ -12,9 +12,9 @@ package huffmancoding;
 public class Node {
 
         public int frequency;
-        int value;
-        Node left;
-        Node right;
+        public int value;
+        public Node left;
+        public Node right;
         String temparvo;
 
         public Node(int value, int frequency, Node left, Node right) {

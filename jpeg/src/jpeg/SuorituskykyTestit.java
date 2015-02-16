@@ -28,8 +28,11 @@ public class SuorituskykyTestit {
         System.out.println(testaa(inputfile, outputfile, filesize));      
     }
     
-    public static void varillinenPieni(){
-        
+    public static void varillinenPieni() throws IOException{
+        String inputfile = "kuva4.rgb";
+        String outputfile = "varillinenpieni.gpeg";
+        int filesize = 256;
+        System.out.println(testaa(inputfile, outputfile, filesize)); 
     }
     
     public static void varillinenIso(){

@@ -20,8 +20,10 @@ public class Jpeg {
      */
     public static void main(String[] args) throws IOException {
         
-        //SuorituskykyTestit.mustatIso();
-        testi2();
+        SuorituskykyTestit.mustatIso();
+        SuorituskykyTestit.mustatPieni();
+        SuorituskykyTestit.varillinenPieni();
+        //testi2();
         
     }
     

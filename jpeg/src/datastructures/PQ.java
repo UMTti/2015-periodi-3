@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package huffmancoding;
+package datastructures;
 
 import java.util.*;
 
@@ -72,14 +72,14 @@ public class PQ extends AbstractCollection {
             lista.remove(size);
             size--;
             if (size > 1) {
-                heapify(1);
+                jarjesta(1);
             }
             return palautus;
         }
         return null;
     }
 
-    public void heapify(int vroot) {
+    public void jarjesta(int vroot) {
         Node last = lista.get(vroot);
         int child, k = vroot;
         while (2 * k <= size) {
