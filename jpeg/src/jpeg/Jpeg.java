@@ -20,8 +20,16 @@ public class Jpeg {
      */
     public static void main(String[] args) throws IOException {
         
-        SuorituskykyTestit.mustatIso();
-        //testi2();
+        //SuorituskykyTestit.mustatIso();
+        testi2();
+        /*PQ keko = new PQ();
+        Node eka = new Node(1, 3, null, null);
+        Node toka = new Node(1, 1, null, null);
+        keko.add(eka);
+        keko.add(toka);
+        Node poisto = keko.remove();
+        System.out.println(poisto.frequency + "Frekvenssi");*/
+        
         
     }
     
