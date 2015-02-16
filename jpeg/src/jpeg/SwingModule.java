@@ -56,7 +56,6 @@ public class SwingModule {
             for (int j = 0; j < y; j++) {
                 double[] arvot = haeSeuraava();
                 arvot = p.convertToRgb(arvot);
-                System.out.println(arvot[0] + " " + arvot[1] + " " + arvot[2]);
                 Color col = new Color((int)arvot[0], (int)arvot[1], (int)arvot[2]);
                 image.setRGB(j, i, col.getRGB());
             }
@@ -67,7 +66,7 @@ public class SwingModule {
     }
 
     /**
-     * Gets next value
+     * Gets next rgb -value from blocks
      * @return
      */
     public double[] haeSeuraava() {

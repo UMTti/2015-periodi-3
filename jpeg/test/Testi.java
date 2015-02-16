@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import huffmancoding.*;
 import java.io.IOException;
 import java.util.Arrays;
 import jpeg.*;
@@ -38,5 +39,48 @@ public class Testi {
         
         assertFalse(Arrays.equals(t.blocks, d.blocks));
         
+    }
+    
+    @Test
+    public void testaaRGB(){
+        double[] testi = new double[]{0, 100, 200};
+        Preprocessor p = new Preprocessor();
+        testi = p.convertToYCbCr(testi);
+        double[] uusi = p.convertToRgb(testi);
+        assertFalse(Arrays.equals(testi, uusi));
+    }
+    
+    @Test
+    public void testaaKvantisointi(){
+        double[][] testi = new double[8][8];
+        for(int i = 0;i<8;i++){
+            for(int j = 0;j<8;j++){
+                testi[i][j] = i;
+            }
+        }
+        Transformer t = new Transformer(new double[100][8][8][3]);
+        testi = t.quantize(testi);
+        double[][] uusi = t.deQuantize(testi);
+        assertArrayEquals(testi, uusi);
+    }
+    
+    @Test
+    public void testaaTransformaatio() throws IOException{
+        double[][] testi = new double[8][8];
+        for(int i = 0;i<8;i++){
+            for(int j = 0;j<8;j++){
+                testi[i][j] = i;
+            }
+        }
+        Transformer t = new Transformer(new double[100][8][8][3]);
+        double[][] uusi = t.DCT(testi);
+        
+        uusi = t.applyIDCT(testi);
+        for(int i = 0;i<8;i++){
+            for(int j = 0;j<8;j++){
+                System.out.println(uusi[i][j]);
+            }
+        }
+        assertArrayEquals(testi, uusi);
     }
 }

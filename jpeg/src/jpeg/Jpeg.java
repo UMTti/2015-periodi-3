@@ -5,6 +5,7 @@
  */
 package jpeg;
 
+import huffmancoding.*;
 import java.io.IOException;
 
 /**
@@ -19,7 +20,8 @@ public class Jpeg {
      */
     public static void main(String[] args) throws IOException {
         
-        testi2();
+        SuorituskykyTestit.mustatIso();
+        //testi2();
         
     }
     
@@ -40,6 +42,7 @@ public class Jpeg {
         p.separate(inputfile, "rgb", 256, 256);
         p.decreaseBlocks(127);
         Transformer t = new Transformer(p.blocks);
+        
         t.blocks = t.doForBlocks(t.blocks, "DCT");
      
         HuffmanCoder h = new HuffmanCoder(t.blocks, 256, 256, outputfile);

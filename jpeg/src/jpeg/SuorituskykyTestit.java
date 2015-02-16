@@ -5,6 +5,7 @@
  */
 package jpeg;
 
+import huffmancoding.*;
 import java.io.IOException;
 
 /**
@@ -51,6 +52,9 @@ public class SuorituskykyTestit {
         d.blocks = t.doForBlocks(d.blocks, "applyIDCT");
         
         p.blocks = d.blocks;
+        p.increaseBlocks(127);
+        SwingModule s = new SwingModule(filesize, filesize, p.blocks, p);
+        s.teeKuva();
         long t2 = System.currentTimeMillis();
         long erotus = t2 - t1;
         return erotus;

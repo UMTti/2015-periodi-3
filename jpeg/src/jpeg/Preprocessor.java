@@ -30,12 +30,22 @@ public class Preprocessor {
      * Size of y-axel
      */
     public int y;
+    private int maara;
+    private int position;
+    private int px;
+    private int py;
+    private int alkuposition;
 
     /**
      * Constructor for Preprocessor object
      */
     public Preprocessor() {
         this.blocks = blocks;
+        this.maara = 0;
+        this.position = 0;
+        this.px = 0;
+        this.py = 0;
+        this.alkuposition = 0;
 
     }
 
@@ -59,11 +69,6 @@ public class Preprocessor {
         this.y = y;
         //System.out.println("Count: " + count);
         this.blocks = new double[count][8][8][3];
-        int maara = 0;
-        int position = 0;
-        int px = 0;
-        int py = 0;
-        int alkuposition = 0;
         for (int i = 0; i < x * y; i++) {
             for (int j = 0; j < 3; j++) {
                 int b = fis.read();
@@ -86,8 +91,6 @@ public class Preprocessor {
                 }
             }
         }
-
-        //bb.order(ByteOrder.LITTLE_ENDIAN);*/
     }
 
     /**
@@ -106,7 +109,7 @@ public class Preprocessor {
             }
         }
     }
-    
+
     public void increaseBlocks(int value) {
         for (int i = 0; i < this.blocks.length; i++) {
             for (int j = 0; j < this.blocks[i].length; j++) {
@@ -121,6 +124,7 @@ public class Preprocessor {
 
     /**
      * Prints all values of double[][][][] blocks.
+     *
      * @param blocks
      */
     public void printBlocks(double[][][][] blocks) {
@@ -161,6 +165,7 @@ public class Preprocessor {
 
     /**
      * Converts YCbCr -block to RGB
+     *
      * @param block
      * @return
      */
@@ -171,9 +176,9 @@ public class Preprocessor {
         double cr = block[2];
 
         double r = Y + 1.402 * (cr - 128);
-        double g = Y - 0.34414*(cb - 128) - 0.71414*(cr - 128);
-        double b = Y + 1.772*(cb - 128);
-        
+        double g = Y - 0.34414 * (cb - 128) - 0.71414 * (cr - 128);
+        double b = Y + 1.772 * (cb - 128);
+
         r = validateRGB(r);
         g = validateRGB(g);
         b = validateRGB(b);
@@ -182,17 +187,18 @@ public class Preprocessor {
         uusi[2] = b;
         return uusi;
     }
-    
+
     /**
      * Validates RGB
+     *
      * @param a
      * @return
      */
-    public double validateRGB(double a){
-        if(a > 255){
+    public double validateRGB(double a) {
+        if (a > 255) {
             return 255;
         }
-        if(a < 0){
+        if (a < 0) {
             return 0;
         }
         return Math.floor(a);
@@ -200,6 +206,7 @@ public class Preprocessor {
 
     /**
      * Writes data to RGB file
+     *
      * @param blocks
      * @throws IOException
      */
