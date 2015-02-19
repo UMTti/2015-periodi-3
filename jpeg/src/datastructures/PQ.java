@@ -8,7 +8,7 @@ package datastructures;
 import java.util.*;
 
 /**
- *
+ * Priority queue for Trie creating
  * @author pihla
  */
 public class PQ extends AbstractCollection {
@@ -35,6 +35,9 @@ public class PQ extends AbstractCollection {
         }
     }
 
+    /**
+     * Constructor for minimum priority queue
+     */
     public PQ() {
         this.c = new HeapComparator();
         this.lista = new ArrayList<Node>();
@@ -42,6 +45,11 @@ public class PQ extends AbstractCollection {
         this.lista.add(new Node(Integer.MAX_VALUE, Integer.MAX_VALUE, null, null));
     }
 
+    /**
+     * Add node to priority queue
+     * @param n
+     * @return
+     */
     public boolean add(Node n) {
         lista.add(n);
         size++;
@@ -55,15 +63,28 @@ public class PQ extends AbstractCollection {
 
         return true;
     }
-
+    
+    /**
+     * Return size of priority queue
+     * @return 
+     */
     public int size() {
         return size;
     }
 
+    
+    /**
+     * Tell if queue is empty
+     * @return 
+     */
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * Remove node from priority queue
+     * @return
+     */
     public Node remove() {
         if (!isEmpty()) {
             Node palautus = lista.get(1);
@@ -79,6 +100,10 @@ public class PQ extends AbstractCollection {
         return null;
     }
 
+    /**
+     * Order queue in removing item
+     * @param vroot
+     */
     public void jarjesta(int vroot) {
         Node last = lista.get(vroot);
         int child, k = vroot;

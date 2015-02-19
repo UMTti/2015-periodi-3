@@ -59,7 +59,7 @@ public class Decoder {
     }
 
     /**
-     *
+     * General function to read whole file. First read trie and then the data. 
      * @throws FileNotFoundException
      */
     public void readAll() throws FileNotFoundException{     
@@ -72,7 +72,7 @@ public class Decoder {
     }
 
     /**
-     * Read trie
+     * General function to read trie to trie of Nodes
      * @return
      */
     public Node readTree() {
@@ -85,7 +85,7 @@ public class Decoder {
     }
 
     /**
-     * Put zeros to blocks 
+     * Put param amount of zeros to blocks
      * @param nollat amount of zeros
      */
     public void taytaNollat(int nollat) {
@@ -124,7 +124,7 @@ public class Decoder {
     }
 
     /**
-     * Read data to blocks[][], then quantizing and DCT
+     * General function to read image data to blocks[][][][]. 
      * @param juuri
      */
     public void readDataToBlocks(Node juuri) {
