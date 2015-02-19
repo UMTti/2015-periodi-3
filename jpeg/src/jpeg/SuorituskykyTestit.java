@@ -14,6 +14,10 @@ import java.io.IOException;
  */
 public class SuorituskykyTestit {
     
+    /**
+     * Musta pieni kuva. 
+     * @throws IOException
+     */
     public static void mustatPieni() throws IOException{
         String outputfile = "mustapieni.gpeg";
         String inputfile = "mustapieni.rgb";
@@ -21,6 +25,10 @@ public class SuorituskykyTestit {
         System.out.println(testaa(inputfile, outputfile, filesize));  
     }
     
+    /**
+     * Musta iso kuva.
+     * @throws IOException
+     */
     public static void mustatIso() throws IOException{
         String outputfile = "mustaiso.gpeg";
         String inputfile = "mustaiso.rgb";
@@ -28,6 +36,10 @@ public class SuorituskykyTestit {
         System.out.println(testaa(inputfile, outputfile, filesize));      
     }
     
+    /**
+     * Värillinen pieni kuva. 
+     * @throws IOException
+     */
     public static void varillinenPieni() throws IOException{
         String inputfile = "kuva4.rgb";
         String outputfile = "varillinenpieni.gpeg";
@@ -35,10 +47,21 @@ public class SuorituskykyTestit {
         System.out.println(testaa(inputfile, outputfile, filesize)); 
     }
     
+    /**
+     *
+     */
     public static void varillinenIso(){
         
     }
     
+    /**
+     * Testipohja. Tätä kutsutaan kyseisestä testistä. 
+     * @param inputfile
+     * @param outputfile
+     * @param filesize
+     * @return
+     * @throws IOException
+     */
     public static long testaa(String inputfile, String outputfile, int filesize) throws IOException{
         long t1 = System.currentTimeMillis();
         Preprocessor p = new Preprocessor();

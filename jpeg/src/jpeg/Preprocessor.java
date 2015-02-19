@@ -50,7 +50,7 @@ public class Preprocessor {
     }
 
     /**
-     * Read byte data and separate it into 8*8 arrays.
+     * Read byte data from .rgb file and separate it into 8*8 arrays.
      *
      * @param filename
      * @param datatype
@@ -110,6 +110,10 @@ public class Preprocessor {
         }
     }
 
+    /**
+     * Increase all values of block[][][][] with a given parameter
+     * @param value
+     */
     public void increaseBlocks(int value) {
         for (int i = 0; i < this.blocks.length; i++) {
             for (int j = 0; j < this.blocks[i].length; j++) {
@@ -142,7 +146,7 @@ public class Preprocessor {
     }
 
     /**
-     * Converts RGB-value block to YCrCb block
+     * Converts RGB-value block of one pixel to YCrCb block
      *
      * @param block
      * @return
@@ -164,7 +168,7 @@ public class Preprocessor {
     }
 
     /**
-     * Converts YCbCr -block to RGB
+     * Converts YCbCr -block of one pixel to RGB
      *
      * @param block
      * @return
@@ -189,7 +193,7 @@ public class Preprocessor {
     }
 
     /**
-     * Validates RGB
+     * Validates RGB. It cannot be over 255 or under 0
      *
      * @param a
      * @return
@@ -205,7 +209,7 @@ public class Preprocessor {
     }
 
     /**
-     * Writes data to RGB file
+     * Writes data to RGB file. This is now just for test. 
      *
      * @param blocks
      * @throws IOException

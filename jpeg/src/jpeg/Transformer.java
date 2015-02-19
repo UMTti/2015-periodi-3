@@ -11,6 +11,9 @@ package jpeg;
  */
 public class Transformer {
 
+    /**
+     *
+     */
     public double[][][][] blocks;
     private double[][] quantizationmatrix;
     private int n;
@@ -19,7 +22,7 @@ public class Transformer {
     private double[][] dpIDCT;
 
     /**
-     *
+     * Initialize transformer object
      * @param blocks
      */
     public Transformer(double[][][][] blocks) {
@@ -33,7 +36,7 @@ public class Transformer {
     }
 
     /**
-     * Initialize coefficients
+     * Initialize coefficients. Those are used in DCT and IDCT later.
      */
     private void initializeCoefficients() {
         this.c = new double[this.n];
@@ -92,7 +95,7 @@ public class Transformer {
     }
 
     /**
-     * Multiply a single 8*8 block with cosines
+     * Do discrete cosine transformation for 8*8px unit
      *
      * @param f
      * @return
@@ -119,6 +122,12 @@ public class Transformer {
         return F;
     }
 
+    /**
+     * Give cosine equation value from dynamic programming table if it exists there. This saves time. 
+     * @param i
+     * @param j
+     * @return
+     */
     public double giveDpvalue(int i, int j) {
         double value;
         if (dpDCT[i][j] != 0) {
@@ -131,7 +140,7 @@ public class Transformer {
     }
 
     /**
-     * Reverse DCT cosine multiplying for 8*8 block
+     * Do inverse cosine transform for 8*8px unit
      *
      * @param F
      * @return
@@ -161,7 +170,7 @@ public class Transformer {
     }
 
     /**
-     * Function to quantize a block with DCT application
+     * Function to quantize a block after DCT. It multiplies value (i, j) of block with value (i, j) of quantization matrice.
      *
      * @param block
      * @return
@@ -183,7 +192,7 @@ public class Transformer {
     }
 
     /**
-     * Function to dequantize a block before IDCT
+     * Function to dequantize  8*8 block before IDCT. It divides value (i, j) with quantization matrice value (i, j)
      *
      * @param block
      * @return

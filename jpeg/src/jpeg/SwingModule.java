@@ -26,7 +26,7 @@ public class SwingModule {
     private Preprocessor p;
 
     /**
-     * Swing module to show image
+     * Swing module to show image in blocks[][][][]
      * @param x
      * @param y
      * @param blocks
