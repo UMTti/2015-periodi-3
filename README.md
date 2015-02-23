@@ -1,10 +1,9 @@
 # JPEG-like compressing algorithm 
 
-JPEG based image compression written in Java. My filename extension is .gpeg . Actually the same parts as in JPEG and now ready are:
+JPEG based image compression written in Java. My filename extension is .gpeg . The parts are all same as in JPEG except the Huffman coding:
 
 1. Discrete cosine transformation
 2. Quantization
-
 3. Huffman coding is done with constructing a trie, not with statistical way as JPEG does. 
 
 Source code is in jpeg/src folder.
