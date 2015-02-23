@@ -41,8 +41,8 @@ public class SuorituskykyTestit {
      * @throws IOException
      */
     public static void varillinenPieni() throws IOException{
-        String inputfile = "kuva4.rgb";
-        String outputfile = "varillinenpieni.gpeg";
+        String inputfile = "homo256.rgb";
+        String outputfile = "homo256.gpeg";
         int filesize = 256;
         System.out.println(testaa(inputfile, outputfile, filesize)); 
     }
@@ -50,8 +50,11 @@ public class SuorituskykyTestit {
     /**
      *
      */
-    public static void varillinenIso(){
-        
+    public static void varillinenIso() throws IOException{
+        String inputfile = "homo1024.rgb";
+        String outputfile = "homo1024.gpeg";
+        int filesize = 1024;
+        System.out.println(testaa(inputfile, outputfile, filesize)); 
     }
     
     /**

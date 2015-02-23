@@ -141,7 +141,7 @@ public class Decoder {
                     x = x.left;
                 }
             }
-            BinaryStdOut.write(x.value, 16);
+            //BinaryStdOut.write(x.value, 16);
             laitaArvo(x.value - 255);
         }
     }

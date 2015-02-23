@@ -50,7 +50,7 @@ public class SwingModule {
     public void teeKuva() {
         int type = BufferedImage.TYPE_INT_ARGB;
 
-        BufferedImage image = new BufferedImage(x, y, type);
+        BufferedImage image = new BufferedImage(y, x, type);
 
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
