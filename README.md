@@ -23,3 +23,7 @@ java -jar "/home/username/JPEG/jpeg/dist/jpeg.jar" image.rgb image.gpeg height w
 ```
 java -jar "/home/username/JPEG/jpeg/dist/jpeg.jar" image.gpeg height width
 ```
+#Compression rate
+
+* Black compressed image is 2% of original image.
+* Colorful test image is 36% of original image.
