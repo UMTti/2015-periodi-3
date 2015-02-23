@@ -14,7 +14,8 @@ import java.util.*;
 public class PQ extends AbstractCollection {
 
     private Comparator c;
-    private ArrayList<Node> lista;
+    //private ArrayList<Node> lista;
+    private Arraylist lista;
     private int size;
 
     @Override
@@ -40,7 +41,7 @@ public class PQ extends AbstractCollection {
      */
     public PQ() {
         this.c = new HeapComparator();
-        this.lista = new ArrayList<Node>();
+        this.lista = new Arraylist();
         this.size = 0;
         this.lista.add(new Node(Integer.MAX_VALUE, Integer.MAX_VALUE, null, null));
     }

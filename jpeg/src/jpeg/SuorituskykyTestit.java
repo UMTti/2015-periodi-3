@@ -67,7 +67,7 @@ public class SuorituskykyTestit {
      */
     public static long testaa(String inputfile, String outputfile, int filesize) throws IOException{
         long t1 = System.currentTimeMillis();
-        Preprocessor p = new Preprocessor();
+        Preprocessor p = new Preprocessor(filesize, filesize);
         p.separate(inputfile, "rgb", filesize, filesize);
         p.decreaseBlocks(127);
         Transformer t = new Transformer(p.blocks);

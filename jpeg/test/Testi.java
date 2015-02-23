@@ -26,7 +26,7 @@ public class Testi {
     public void testaaHuffman() throws IOException {
         String outputfile = "tulos.gpeg";
         String inputfile = "kuva4.rgb";
-        Preprocessor p = new Preprocessor();
+        Preprocessor p = new Preprocessor(256, 256);
         p.separate(inputfile, "rgb", 256, 256);
         p.decreaseBlocks(127);
         Transformer t = new Transformer(p.blocks);
@@ -45,7 +45,7 @@ public class Testi {
     @Test
     public void testaaRGB(){
         double[] testi = new double[]{0, 100, 200};
-        Preprocessor p = new Preprocessor();
+        Preprocessor p = new Preprocessor(0, 0);
         testi = p.convertToYCbCr(testi);
         double[] uusi = p.convertToRgb(testi);
         assertFalse(Arrays.equals(testi, uusi));
@@ -92,5 +92,15 @@ public class Testi {
         pq.add(new Node(1, 3, null, null));
         pq.add(new Node(1, 4, null, null));
         assertSame(2, pq.remove().frequency);
+    }
+    
+    @Test
+    public void testaaArraylist(){
+        Arraylist a = new Arraylist();
+        a.add(new Node(1, 2, null, null));
+        a.add(new Node(1, 3, null, null));
+        a.add(new Node(1, 4, null, null));
+        Node r = a.remove(2);
+        assertSame(4, r.frequency);
     }
 }

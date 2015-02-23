@@ -39,13 +39,15 @@ public class Preprocessor {
     /**
      * Constructor for Preprocessor object
      */
-    public Preprocessor() {
+    public Preprocessor(int x, int y) {
         this.blocks = blocks;
         this.maara = 0;
         this.position = 0;
         this.px = 0;
         this.py = 0;
         this.alkuposition = 0;
+        this.x = x;
+        this.y = y;
 
     }
 
@@ -214,17 +216,16 @@ public class Preprocessor {
      * @param blocks
      * @throws IOException
      */
-    public void writeToRgbFile(double[][][][] blocks) throws IOException {
+    public void writeToRgbFile(double[][][][] blocks, String filename) throws IOException {
         int i = 0;
         int position = 0;
         int px = 0;
         int py = 0;
         int alkuposition = 0;
         int maara = 0;
-
         //File file = new File("tulos.rgb");
         //BufferedWriter output = new BufferedWriter(new FileWriter(file));
-        DataOutputStream os = new DataOutputStream(new FileOutputStream("tulos.rgb"));
+        DataOutputStream os = new DataOutputStream(new FileOutputStream(filename));
         while (i < (x * y)) {
             double[] arvot = blocks[position][px][py];
             arvot = convertToRgb(arvot);
