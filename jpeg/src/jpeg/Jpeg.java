@@ -90,6 +90,15 @@ public class Jpeg {
         s.teeKuva();
     }
     
+    /**
+     * Extract inputfile .gpeg and write rgb-values to .rgb-file given as outpufile parameter.
+     * @param inputfile
+     * @param outputfile
+     * @param filex
+     * @param filey
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public static void extract(String inputfile, String outputfile, int filex, int filey) throws FileNotFoundException, IOException{
         Preprocessor p = new Preprocessor(filex, filey);
         Decoder d = new Decoder(filex, filey, inputfile);
