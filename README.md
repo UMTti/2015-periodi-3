@@ -11,6 +11,8 @@ Source code is in jpeg/src folder.
 
 #Usage
 
+At the moment, this program requires that both width % 8 = 0 and height % 8 = 0. I'm working with support to all images.
+
 * Compress .rgb -image
 ```
 java -jar "/home/username/JPEG/jpeg/dist/jpeg.jar" image.rgb image.gpeg height width
