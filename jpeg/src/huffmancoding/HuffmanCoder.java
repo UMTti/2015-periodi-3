@@ -265,8 +265,11 @@ public class HuffmanCoder {
      * @throws IOException
      */
     public void writeToFile(Node vika) throws FileNotFoundException, IOException {
+        System.out.println("Kirjotettu akselit");
         String filename = this.filename;
         BinaryStdOut.instantiateFileoutput(filename);
+        BinaryStdOut.write(this.x, 16);
+        BinaryStdOut.write(this.y, 16);
         writeTrie(vika);
         BinaryStdOut.write(this.kokonaismaara, 32);
         writeValues();

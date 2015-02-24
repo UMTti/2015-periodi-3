@@ -17,8 +17,8 @@ import java.util.logging.Logger;
  */
 public class Decoder {
 
-    private int x;
-    private int y;
+    public int x;
+    public int y;
 
     /**
      *
@@ -44,11 +44,7 @@ public class Decoder {
      * @param filename
      * @throws FileNotFoundException
      */
-    public Decoder(int x, int y, String filename) throws FileNotFoundException { 
-        this.x = x;
-        this.y = y;
-        int count = (x * y) / (8 * 8);
-        this.blocks = new double[count][8][8][3];
+    public Decoder(String filename) throws FileNotFoundException { 
         this.i = 0;
         this.position = 0;
         this.px = 0;
@@ -64,6 +60,13 @@ public class Decoder {
      */
     public void readAll() throws FileNotFoundException{     
         b = new BinaryIn(this.filename);
+        this.x = b.readShort();
+        this.y = b.readShort();
+        
+        int count = (x * y) / (8 * 8);
+        this.blocks = new double[count][8][8][3];
+        
+        
         //BinaryStdIn.instantiateFileinput();
         //BinaryStdIn.instantiateFileinput();
         Node juuri = readTree();

@@ -35,7 +35,7 @@ public class Testi {
         HuffmanCoder h = new HuffmanCoder(t.blocks, 256, 256, outputfile);
         h.makeHuffmanCoding();
         
-        Decoder d = new Decoder(256, 256, outputfile);
+        Decoder d = new Decoder(outputfile);
         d.readAll();
         
         assertFalse(Arrays.equals(t.blocks, d.blocks));

@@ -36,16 +36,13 @@ public class Jpeg {
             
         } else if(command.equals("show")){
             outputfile = args[1];
-            sizex = Integer.parseInt(args[2]);
-            sizey = Integer.parseInt(args[3]);
-            show(outputfile, sizex, sizey);
+            show(outputfile);
             
         } else if(command.equals("extract")){
             inputfile = args[1];
             outputfile = args[2];
-            sizex = Integer.parseInt(args[3]);
-            sizey = Integer.parseInt(args[4]);
-            extract(inputfile, outputfile, sizex, sizey);
+            
+            extract(inputfile, outputfile);
         }
         
         //SuorituskykyTestit.varillinenPieni();
@@ -77,16 +74,16 @@ public class Jpeg {
      * @param filesize
      * @throws FileNotFoundException
      */
-    public static void show(String outputfile, int filex, int filey) throws FileNotFoundException{
-        Preprocessor p = new Preprocessor(filex, filey);
-        Decoder d = new Decoder(filex, filey, outputfile);
+    public static void show(String outputfile) throws FileNotFoundException{
+        Preprocessor p = new Preprocessor();
+        Decoder d = new Decoder(outputfile);
         d.readAll();
         
         Transformer t = new Transformer(d.blocks);
         d.blocks = t.doForBlocks(d.blocks, "applyIDCT");
         p.blocks = d.blocks;
         p.increaseBlocks(127);
-        SwingModule s = new SwingModule(filex, filey, p.blocks, p);
+        SwingModule s = new SwingModule(d.x, d.y, p.blocks, p);
         s.teeKuva();
     }
     
@@ -99,15 +96,15 @@ public class Jpeg {
      * @throws FileNotFoundException
      * @throws IOException 
      */
-    public static void extract(String inputfile, String outputfile, int filex, int filey) throws FileNotFoundException, IOException{
-        Preprocessor p = new Preprocessor(filex, filey);
-        Decoder d = new Decoder(filex, filey, inputfile);
+    public static void extract(String inputfile, String outputfile) throws FileNotFoundException, IOException{
+        Preprocessor p = new Preprocessor();
+        Decoder d = new Decoder(inputfile);
         d.readAll();     
         Transformer t = new Transformer(d.blocks);
         d.blocks = t.doForBlocks(d.blocks, "applyIDCT");
         p.blocks = d.blocks;
         p.increaseBlocks(127);
-        p.writeToRgbFile(p.blocks, outputfile);       
+        p.writeToRgbFile(p.blocks, outputfile, d.x, d.y);       
     }
     
 }

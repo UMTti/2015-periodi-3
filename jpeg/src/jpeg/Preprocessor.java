@@ -39,15 +39,25 @@ public class Preprocessor {
     /**
      * Constructor for Preprocessor object
      */
-    public Preprocessor(int x, int y) {
+    public Preprocessor() {
         this.blocks = blocks;
         this.maara = 0;
         this.position = 0;
         this.px = 0;
         this.py = 0;
         this.alkuposition = 0;
+
+    }
+    
+    public Preprocessor(int x, int y) {
         this.x = x;
         this.y = y;
+        this.blocks = blocks;
+        this.maara = 0;
+        this.position = 0;
+        this.px = 0;
+        this.py = 0;
+        this.alkuposition = 0;
 
     }
 
@@ -216,7 +226,9 @@ public class Preprocessor {
      * @param blocks
      * @throws IOException
      */
-    public void writeToRgbFile(double[][][][] blocks, String filename) throws IOException {
+    public void writeToRgbFile(double[][][][] blocks, String filename, int x, int y) throws IOException {
+        this.x = x;
+        this.y = y;
         int i = 0;
         int position = 0;
         int px = 0;

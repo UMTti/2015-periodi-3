@@ -76,7 +76,7 @@ public class SuorituskykyTestit {
         HuffmanCoder h = new HuffmanCoder(t.blocks, filesize, filesize, outputfile);
         h.makeHuffmanCoding();
         
-        Decoder d = new Decoder(filesize, filesize, outputfile);
+        Decoder d = new Decoder(outputfile);
         d.readAll();
         d.blocks = t.doForBlocks(d.blocks, "applyIDCT");
         
