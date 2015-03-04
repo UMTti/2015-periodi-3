@@ -14,14 +14,22 @@ First clone the repository. At the moment, this program requires that both width
 
 * Compress .rgb -image
 ```
-java -jar "/home/username/JPEG/jpeg/dist/jpeg.jar" image.rgb image.gpeg height width
+java -jar "/home/username/JPEG/jpeg/dist/jpeg.jar" compress image.rgb image.gpeg height width
 
 ```
 * Show .gpeg image 
 
 ```
-java -jar "/home/username/JPEG/jpeg/dist/jpeg.jar" image.gpeg height width
+java -jar "/home/username/JPEG/jpeg/dist/jpeg.jar" show image.gpeg height width
 ```
+* Extract .gpeg to .rgb
+
+```
+java -jar "/home/username/JPEG/jpeg/dist/jpeg.jar" extract image.gpeg image.rgb
+```
+
+
+
 #Compression rate
 
 * Black compressed image is 2% of original image.
