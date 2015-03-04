@@ -27,10 +27,10 @@ public class SwingModule {
 
     /**
      * Swing module to show image in blocks[][][][]
-     * @param x
-     * @param y
-     * @param blocks
-     * @param p
+     * @param x x
+     * @param y y
+     * @param blocks blocks
+     * @param p p
      */
     public SwingModule(int x, int y, double[][][][] blocks, Preprocessor p) {
         this.x = x;
@@ -67,7 +67,7 @@ public class SwingModule {
 
     /**
      * Gets next rgb -value from blocks
-     * @return
+     * @return arvot rgb values
      */
     public double[] haeSeuraava() {
         double[] arvot = this.blocks[position][px][py];
@@ -91,8 +91,8 @@ public class SwingModule {
     }
 
     /**
-     * Show image with JFrame
-     * @param image
+     * Show image with JFrame 
+     * @param image image
      */
     public void nayta(BufferedImage image) {
         JFrame frame = new JFrame();

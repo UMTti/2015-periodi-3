@@ -51,10 +51,11 @@ public class Jpeg {
     
     /**
      * Compress image from .rgb file to .gpeg file
-     * @param inputfile
-     * @param outputfile
-     * @param filesize
-     * @throws IOException
+     * @param inputfile inputfile
+     * @param outputfile outputfile
+     * @param filex filex
+     * @param filey filey
+     * @throws IOException exception
      */
     public static void compress(String inputfile, String outputfile, int filex, int filey) throws IOException{
         Preprocessor p = new Preprocessor(filex, filey);
@@ -66,13 +67,13 @@ public class Jpeg {
      
         HuffmanCoder h = new HuffmanCoder(t.blocks, filex, filey, outputfile);
         h.makeHuffmanCoding();      
+        System.out.println("Pakattu " + inputfile);
     }
     
     /**
      * Show image from output .gpeg file
-     * @param outputfile
-     * @param filesize
-     * @throws FileNotFoundException
+     * @param outputfile outputfile
+     * @throws FileNotFoundException exception
      */
     public static void show(String outputfile) throws FileNotFoundException{
         Preprocessor p = new Preprocessor();
@@ -89,12 +90,10 @@ public class Jpeg {
     
     /**
      * Extract inputfile .gpeg and write rgb-values to .rgb-file given as outpufile parameter.
-     * @param inputfile
-     * @param outputfile
-     * @param filex
-     * @param filey
-     * @throws FileNotFoundException
-     * @throws IOException 
+     * @param inputfile inputfile
+     * @param outputfile outputfile
+     * @throws FileNotFoundException exception
+     * @throws IOException exception
      */
     public static void extract(String inputfile, String outputfile) throws FileNotFoundException, IOException{
         Preprocessor p = new Preprocessor();
@@ -104,7 +103,8 @@ public class Jpeg {
         d.blocks = t.doForBlocks(d.blocks, "applyIDCT");
         p.blocks = d.blocks;
         p.increaseBlocks(127);
-        p.writeToRgbFile(p.blocks, outputfile, d.x, d.y);       
+        p.writeToRgbFile(p.blocks, outputfile, d.x, d.y);   
+        System.out.println("Purettu " + inputfile);
     }
     
 }

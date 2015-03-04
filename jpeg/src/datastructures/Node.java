@@ -11,20 +11,34 @@ package datastructures;
  */
 public class Node {
 
+    /**
+     *
+     */
     public int frequency;
+
+    /**
+     *
+     */
     public int value;
+
+    /**
+     *
+     */
     public Node left;
 
+    /**
+     *
+     */
     public Node right;
     String temparvo;
 
     /**
      * One constructor for Node class
      *
-     * @param value
-     * @param frequency
-     * @param left
-     * @param right
+     * @param value value
+     * @param frequency frequency
+     * @param left left
+     * @param right right
      */
     public Node(int value, int frequency, Node left, Node right) {
         this.frequency = frequency;
@@ -36,10 +50,10 @@ public class Node {
     /**
      * Another constructor with temparvo. That is used in decoder.java
      *
-     * @param temparvo
-     * @param frequency
-     * @param left
-     * @param right
+     * @param temparvo temparvo
+     * @param frequency frequency
+     * @param left left
+     * @param right right 
      */
     public Node(String temparvo, int frequency, Node left, Node right) {
         this.frequency = frequency;
@@ -51,7 +65,7 @@ public class Node {
     /**
      * Checks if node is leaf
      *
-     * @return
+     * @return boolean 
      */
     public boolean isLeaf() {
         if (this.right == null && this.left == null) {

@@ -48,8 +48,8 @@ public class PQ extends AbstractCollection {
 
     /**
      * Add node to priority queue
-     * @param n
-     * @return
+     * @param n n
+     * @return boolean
      */
     public boolean add(Node n) {
         lista.add(n);
@@ -67,7 +67,7 @@ public class PQ extends AbstractCollection {
     
     /**
      * Return size of priority queue
-     * @return 
+     * @return size
      */
     public int size() {
         return size;
@@ -76,7 +76,7 @@ public class PQ extends AbstractCollection {
     
     /**
      * Tell if queue is empty
-     * @return 
+     * @return boolean isEmpty
      */
     public boolean isEmpty() {
         return size == 0;
@@ -84,7 +84,7 @@ public class PQ extends AbstractCollection {
 
     /**
      * Remove node from priority queue
-     * @return
+     * @return removed node or null
      */
     public Node remove() {
         if (!isEmpty()) {
@@ -103,7 +103,7 @@ public class PQ extends AbstractCollection {
 
     /**
      * Order queue in removing item
-     * @param vroot
+     * @param vroot root
      */
     public void jarjesta(int vroot) {
         Node last = lista.get(vroot);

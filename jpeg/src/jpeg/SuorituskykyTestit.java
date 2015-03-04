@@ -15,7 +15,7 @@ import java.io.IOException;
 public class SuorituskykyTestit {
     
     /**
-     * Musta pieni kuva. 
+     * Testaa mustaa pientä kuvaa, 256*256px. Printtaa ajan millisekunteina
      * @throws IOException
      */
     public static void mustatPieni() throws IOException{
@@ -26,8 +26,8 @@ public class SuorituskykyTestit {
     }
     
     /**
-     * Musta iso kuva.
-     * @throws IOException
+     * Musta iso 1024*1024 kuva, printtaa ajan millisekunteina
+     * @throws IOException exception
      */
     public static void mustatIso() throws IOException{
         String outputfile = "mustaiso.gpeg";
@@ -37,8 +37,8 @@ public class SuorituskykyTestit {
     }
     
     /**
-     * Värillinen pieni kuva. 
-     * @throws IOException
+     * Värillinen pieni kuva, 256*256px, printtaa ajan millisekunteina
+     * @throws IOException exception
      */
     public static void varillinenPieni() throws IOException{
         String inputfile = "homo256.rgb";
@@ -48,7 +48,8 @@ public class SuorituskykyTestit {
     }
     
     /**
-     *
+     * Värillinen iso 1024*1024px kuva, printtaa ajan millisekunteina
+     * @throws java.io.IOException exception
      */
     public static void varillinenIso() throws IOException{
         String inputfile = "homo1024.rgb";
@@ -58,12 +59,12 @@ public class SuorituskykyTestit {
     }
     
     /**
-     * Testipohja. Tätä kutsutaan kyseisestä testistä. 
-     * @param inputfile
-     * @param outputfile
-     * @param filesize
-     * @return
-     * @throws IOException
+     * Testipohja. Tätä kutsutaan testistä, tämä ajaa pakkaamisen ja purkamisen kyseisen testin kuvalle. 
+     * @param inputfile inputfile
+     * @param outputfile outputfile
+     * @param filesize filesize
+     * @return erotus, aika millisekunteina
+     * @throws IOException exception
      */
     public static long testaa(String inputfile, String outputfile, int filesize) throws IOException{
         long t1 = System.currentTimeMillis();

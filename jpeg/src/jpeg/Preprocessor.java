@@ -49,6 +49,11 @@ public class Preprocessor {
 
     }
     
+    /**
+     * Constructor for preprocessor
+     * @param x x
+     * @param y x
+     */
     public Preprocessor(int x, int y) {
         this.x = x;
         this.y = y;
@@ -64,12 +69,12 @@ public class Preprocessor {
     /**
      * Read byte data from .rgb file and separate it into 8*8 arrays.
      *
-     * @param filename
-     * @param datatype
-     * @param x
-     * @param y
-     * @throws FileNotFoundException
-     * @throws IOException
+     * @param filename filename
+     * @param datatype datatype
+     * @param x x
+     * @param y y
+     * @throws FileNotFoundException exception
+     * @throws IOException exception
      */
     public void separate(String filename, String datatype, int x, int y) throws FileNotFoundException, IOException {
         //  read the file into a byte array
@@ -108,7 +113,7 @@ public class Preprocessor {
     /**
      * Decrease all values of block with value given a parameter
      *
-     * @param value
+     * @param value value
      */
     public void decreaseBlocks(int value) {
         for (int i = 0; i < this.blocks.length; i++) {
@@ -124,7 +129,7 @@ public class Preprocessor {
 
     /**
      * Increase all values of block[][][][] with a given parameter
-     * @param value
+     * @param value value
      */
     public void increaseBlocks(int value) {
         for (int i = 0; i < this.blocks.length; i++) {
@@ -141,7 +146,7 @@ public class Preprocessor {
     /**
      * Prints all values of double[][][][] blocks.
      *
-     * @param blocks
+     * @param blocks blocks
      */
     public void printBlocks(double[][][][] blocks) {
         for (int i = 0; i < blocks.length; i++) {
@@ -160,8 +165,8 @@ public class Preprocessor {
     /**
      * Converts RGB-value block of one pixel to YCrCb block
      *
-     * @param block
-     * @return
+     * @param block block
+     * @return block
      */
     public double[] convertToYCbCr(double[] block) {
 
@@ -180,10 +185,10 @@ public class Preprocessor {
     }
 
     /**
-     * Converts YCbCr -block of one pixel to RGB
+     * Converts YCbCr -block of one pixel (3 values) to RGB
      *
-     * @param block
-     * @return
+     * @param block block
+     * @return converted block
      */
     public double[] convertToRgb(double[] block) {
         double[] uusi = new double[3];
@@ -207,8 +212,8 @@ public class Preprocessor {
     /**
      * Validates RGB. It cannot be over 255 or under 0
      *
-     * @param a
-     * @return
+     * @param a rgb value
+     * @return validated value
      */
     public double validateRGB(double a) {
         if (a > 255) {
@@ -223,7 +228,10 @@ public class Preprocessor {
     /**
      * Writes data to RGB file. This is now just for test. 
      *
-     * @param blocks
+     * @param blocks blocks
+     * @param filename filename
+     * @param x x
+     * @param y y
      * @throws IOException
      */
     public void writeToRgbFile(double[][][][] blocks, String filename, int x, int y) throws IOException {

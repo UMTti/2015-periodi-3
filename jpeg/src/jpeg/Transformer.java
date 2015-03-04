@@ -11,6 +11,9 @@ package jpeg;
  */
 public class Transformer {
 
+    /**
+     *
+     */
     public double[][][][] blocks;
     private double[][] quantizationmatrix;
     private int n;
@@ -20,7 +23,7 @@ public class Transformer {
 
     /**
      * Initialize transformer object
-     * @param blocks
+     * @param blocks blocks
      */
     public Transformer(double[][][][] blocks) {
         this.blocks = blocks;
@@ -46,9 +49,9 @@ public class Transformer {
     /**
      * Does a function given a parameter for all 8*8 blocks and saves block back
      *
-     * @param blocks
-     * @param command
-     * @return
+     * @param blocks blocks
+     * @param command command
+     * @return blocks 
      */
     public double[][][][] doForBlocks(double[][][][] blocks, String command) {
         for (int i = 0; i < blocks.length; i++) {
@@ -94,8 +97,8 @@ public class Transformer {
     /**
      * Do discrete cosine transformation for 8*8px unit
      *
-     * @param f
-     * @return
+     * @param f 8*8px unit
+     * @return 8*8px unit transformed
      */
     public double[][] DCT(double[][] f) {
         int n = this.n;
@@ -121,9 +124,9 @@ public class Transformer {
 
     /**
      * Give cosine equation value from dynamic programming table if it exists there. This saves time. 
-     * @param i
-     * @param j
-     * @return
+     * @param i i
+     * @param j j
+     * @return value
      */
     public double giveDpvalue(int i, int j) {
         double value;
@@ -139,8 +142,8 @@ public class Transformer {
     /**
      * Do inverse cosine transform for 8*8px unit
      *
-     * @param F
-     * @return
+     * @param F 8*8px unit
+     * @return f 8*8px inverse-transformed unit
      */
     public double[][] applyIDCT(double[][] F) {
         int n = this.n;
@@ -169,8 +172,8 @@ public class Transformer {
     /**
      * Function to quantize a block after DCT. It multiplies value (i, j) of block with value (i, j) of quantization matrice.
      *
-     * @param block
-     * @return
+     * @param block 8*8 block
+     * @return quantized block
      */
     public double[][] quantize(double[][] block) {
         int n = this.n;
@@ -191,8 +194,8 @@ public class Transformer {
     /**
      * Function to dequantize  8*8 block before IDCT. It divides value (i, j) with quantization matrice value (i, j)
      *
-     * @param block
-     * @return
+     * @param block 8*8px block
+     * @return 8*8px block dequantized
      */
     public double[][] deQuantize(double[][] block) {
         int n = this.n;

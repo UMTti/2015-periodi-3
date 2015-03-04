@@ -55,9 +55,9 @@ public class HuffmanCoder {
     /**
      * Object which handles operations related to huffman coding
      *
-     * @param blocks
-     * @param x
-     * @param y
+     * @param blocks blocks
+     * @param x y
+     * @param y y
      */
     private String[] koodiarvot;
     private int nollat;
@@ -66,10 +66,10 @@ public class HuffmanCoder {
 
     /**
      *
-     * @param blocks
-     * @param x
-     * @param y
-     * @param filename
+     * @param blocks blocks
+     * @param x x
+     * @param y y
+     * @param filename filename
      */
     public HuffmanCoder(double[][][][] blocks, int x, int y, String filename) {
         this.blocks = blocks;
@@ -107,8 +107,8 @@ public class HuffmanCoder {
     /**
      * Makes table of frequencies. x*y*3 is zero in values
      *
-     * @param blocks
-     * @return
+     * @param blocks blocks 
+     * @return frequencies table
      */
     public int[] makeFreqsTable(double[][][][] blocks) {
         HashSet<Integer> erilaiset = new HashSet<Integer>();
@@ -138,10 +138,10 @@ public class HuffmanCoder {
     }
 
     /**
-     * Makes minimum heap of frequencies -> heap sort can be applied later
+     * Makes minimum heap of frequencies - heap sort can be applied later
      *
      * @param frequencies
-     * @return
+     * @return minimumheap
      */
     public PQ makeMinimumHeap(int[] frequencies) {       
         PQ minimumheap = new PQ();
@@ -160,8 +160,8 @@ public class HuffmanCoder {
 
     /**
      * Build code values -table
-     * @param n
-     * @param s
+     * @param n n
+     * @param s code value 
      */
     public void buildKoodiarvot(Node n, String s) {
         if (!n.isLeaf()) {
@@ -173,11 +173,11 @@ public class HuffmanCoder {
     }
 
     /**
-     * Number 255 is added for every value, so everything is positive >
+     * Number 255 is added for every value, so everything is positive
      *
-     * @param n
-     * @throws FileNotFoundException
-     * @throws IOException
+     * @param n n
+     * @throws FileNotFoundException exception
+     * @throws IOException exception
      */
     public void writeTrie(Node n) throws FileNotFoundException, IOException {
         if (n.isLeaf()) {
@@ -192,8 +192,8 @@ public class HuffmanCoder {
 
     /**
      * Write values after writing a trie
-     * @throws FileNotFoundException
-     * @throws IOException
+     * @throws FileNotFoundException exception
+     * @throws IOException exception
      */
     public void writeValues() throws FileNotFoundException, IOException {
         int i = 0;
@@ -228,7 +228,7 @@ public class HuffmanCoder {
 
     /**
      * Write one value to file
-     * @param arvo
+     * @param arvo arvo
      */
     public void writeOneValue(int arvo) {
         if (arvo == 0) {
@@ -251,8 +251,8 @@ public class HuffmanCoder {
 
     /**
      * Give code value of one value
-     * @param value
-     * @return
+     * @param value value
+     * @return code value
      */
     public String giveCodeValue(int value) {
         return this.koodiarvot[value + x * y * 3];
@@ -260,12 +260,12 @@ public class HuffmanCoder {
 
     /**
      * General function to write the whole image to file
-     * @param vika
-     * @throws FileNotFoundException
-     * @throws IOException
+     * @param vika root of trie
+     * @throws FileNotFoundException exception
+     * @throws IOException exception 
      */
     public void writeToFile(Node vika) throws FileNotFoundException, IOException {
-        System.out.println("Kirjotettu akselit");
+        //System.out.println("Kirjotettu akselit");
         String filename = this.filename;
         BinaryStdOut.instantiateFileoutput(filename);
         BinaryStdOut.write(this.x, 16);

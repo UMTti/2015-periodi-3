@@ -17,7 +17,14 @@ import java.util.logging.Logger;
  */
 public class Decoder {
 
+    /**
+     *
+     */
     public int x;
+
+    /**
+     *
+     */
     public int y;
 
     /**
@@ -39,10 +46,8 @@ public class Decoder {
 
     /**
      * Object which handles decoder attributes
-     * @param x
-     * @param y
-     * @param filename
-     * @throws FileNotFoundException
+     * @param filename filename
+     * @throws FileNotFoundException exception
      */
     public Decoder(String filename) throws FileNotFoundException { 
         this.i = 0;
@@ -56,7 +61,7 @@ public class Decoder {
 
     /**
      * General function to read whole file. First read trie and then the data. 
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException exception
      */
     public void readAll() throws FileNotFoundException{     
         b = new BinaryIn(this.filename);
@@ -76,7 +81,7 @@ public class Decoder {
 
     /**
      * General function to read trie to trie of Nodes
-     * @return
+     * @return node 
      */
     public Node readTree() {
         boolean totuusarvo = b.readBoolean();
@@ -128,7 +133,7 @@ public class Decoder {
 
     /**
      * General function to read image data to blocks[][][][]. 
-     * @param juuri
+     * @param juuri juuri
      */
     public void readDataToBlocks(Node juuri) {
         int length = b.readInt();

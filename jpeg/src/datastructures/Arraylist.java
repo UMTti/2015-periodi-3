@@ -26,8 +26,8 @@ public class Arraylist {
 
     /**
      * Get i:th Node in list
-     * @param i
-     * @return
+     * @param i i
+     * @return node
      */
     public Node get(int i) {
         if (i < size) {
@@ -39,7 +39,7 @@ public class Arraylist {
 
     /**
      * Add Node to list
-     * @param n
+     * @param n node
      */
     public void add(Node n) {
         if (store.length - size <= 5) {
@@ -57,7 +57,7 @@ public class Arraylist {
 
     /**
      * Return size of list in use at the moment
-     * @return
+     * @return size
      */
     public int size() {
         return size;
@@ -65,8 +65,8 @@ public class Arraylist {
 
     /**
      * Set node given a parameter to i:th place
-     * @param i
-     * @param n
+     * @param i i
+     * @param n n
      */
     public void set(int i, Node n) {
         if (i < size) {
@@ -78,7 +78,7 @@ public class Arraylist {
 
     /**
      * Remove i:th item in list and move others 
-     * @param i
+     * @param i i
      * @return
      */
     public Node remove(int i) {
