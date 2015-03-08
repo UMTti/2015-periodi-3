@@ -217,7 +217,6 @@ public class HuffmanCoder {
                 py++;
                 position = alkuposition;
                 if (py == 8) {
-                    // pitaa siirtaa positionia jotenkin
                     position += (x / 8);
                     alkuposition = position;
                     py = 0;
@@ -265,7 +264,6 @@ public class HuffmanCoder {
      * @throws IOException exception 
      */
     public void writeToFile(Node vika) throws FileNotFoundException, IOException {
-        //System.out.println("Kirjotettu akselit");
         String filename = this.filename;
         BinaryStdOut.instantiateFileoutput(filename);
         BinaryStdOut.write(this.x, 16);

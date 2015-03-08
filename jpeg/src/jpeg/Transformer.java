@@ -118,7 +118,6 @@ public class Transformer {
                 F[u][v] = sum;
             }
         }
-        //System.out.println(t2-t1);
         return F;
     }
 
@@ -185,7 +184,6 @@ public class Transformer {
                 } else {
                     block[i][j] = Math.ceil(arvo);
                 }
-                //block[i][j] = Math.round(arvo);
             }
         }
         return block;

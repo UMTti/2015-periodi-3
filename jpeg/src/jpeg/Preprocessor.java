@@ -80,11 +80,9 @@ public class Preprocessor {
         //  read the file into a byte array
         File file = new File(filename);
         FileInputStream fis = new FileInputStream(file);
-        //byte[] arr = new byte[(int) file.length()];
         int count = (x * y) / (8 * 8);
         this.x = x;
         this.y = y;
-        //System.out.println("Count: " + count);
         this.blocks = new double[count][8][8][3];
         for (int i = 0; i < x * y; i++) {
             for (int j = 0; j < 3; j++) {
@@ -101,7 +99,6 @@ public class Preprocessor {
                 py++;
                 position = alkuposition;
                 if (py == 8) {
-                    // pitaa siirtaa positionia jotenkin
                     position += (x / 8);
                     alkuposition = position;
                     py = 0;
@@ -243,15 +240,12 @@ public class Preprocessor {
         int py = 0;
         int alkuposition = 0;
         int maara = 0;
-        //File file = new File("tulos.rgb");
-        //BufferedWriter output = new BufferedWriter(new FileWriter(file));
         DataOutputStream os = new DataOutputStream(new FileOutputStream(filename));
         while (i < (x * y)) {
             double[] arvot = blocks[position][px][py];
             arvot = convertToRgb(arvot);
             for (int j = 0; j < arvot.length; j++) {
                 BigInteger bigInt = BigInteger.valueOf((int) arvot[j]);
-                //output.write(bigInt.byteValue());
                 os.write(bigInt.byteValue());
                 maara++;
             }
@@ -266,14 +260,12 @@ public class Preprocessor {
                 py++;
                 position = alkuposition;
                 if (py == 8) {
-                    // pitaa siirtaa positionia jotenkin
                     position += (x / 8);
                     alkuposition = position;
                     py = 0;
                 }
             }
         }
-        //output.close();
         os.close();
 
     }

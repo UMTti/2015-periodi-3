@@ -17,19 +17,10 @@ import java.util.logging.Logger;
  */
 public class Decoder {
 
-    /**
-     *
-     */
     public int x;
-
-    /**
-     *
-     */
+    
     public int y;
 
-    /**
-     *
-     */
     public double[][][][] blocks;
     private int px;
     private int py;
@@ -71,12 +62,8 @@ public class Decoder {
         int count = (x * y) / (8 * 8);
         this.blocks = new double[count][8][8][3];
         
-        
-        //BinaryStdIn.instantiateFileinput();
-        //BinaryStdIn.instantiateFileinput();
         Node juuri = readTree();
         readDataToBlocks(juuri);
-        //BinaryStdIn.close();
     }
 
     /**
@@ -122,7 +109,6 @@ public class Decoder {
                 py++;
                 position = alkuposition;
                 if (py == 8) {
-                    // pitaa siirtaa positionia jotenkin
                     position += (x / 8);
                     alkuposition = position;
                     py = 0;
@@ -149,7 +135,6 @@ public class Decoder {
                     x = x.left;
                 }
             }
-            //BinaryStdOut.write(x.value, 16);
             laitaArvo(x.value - 255);
         }
     }

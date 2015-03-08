@@ -11,24 +11,9 @@ package datastructures;
  */
 public class Node {
 
-    /**
-     *
-     */
     public int frequency;
-
-    /**
-     *
-     */
     public int value;
-
-    /**
-     *
-     */
     public Node left;
-
-    /**
-     *
-     */
     public Node right;
     String temparvo;
 
